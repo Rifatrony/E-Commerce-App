@@ -33,14 +33,14 @@ public class HomeFragment extends Fragment {
     View view;
     RecyclerView categoriesRecyclerView;
     CategoryAdapter categoryAdapter;
-    List<CategoryResponse> categoryResponseList;
+    CategoryResponse categoryResponse;
 
     SliderView sliderView;
     SliderResponse sliderResponse;
     SliderAdapter sliderAdapter;
 
     RecyclerView topSellingRecyclerView;
-    List<TopSellingResponse> topSellingResponseList;
+    TopSellingResponse topSellingResponse;
     TopSellingAdapter topSellingAdapter;
 
     @Override
@@ -56,18 +56,25 @@ public class HomeFragment extends Fragment {
     }
 
     private void setTopSelling() {
-        topSellingResponseList = new ArrayList<>();
         topSellingRecyclerView = view.findViewById(R.id.topSellingRecyclerView);
         topSellingRecyclerView.setHasFixedSize(true);
         topSellingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        topSellingResponseList.add(new TopSellingResponse(R.drawable.fruits, "Fruits", "Kg", 1, 200));
-        topSellingResponseList.add(new TopSellingResponse(R.drawable.fruits, "Fruits", "Kg", 1, 200));
-        topSellingResponseList.add(new TopSellingResponse(R.drawable.fruits, "Fruits", "Kg", 1, 200));
-        topSellingResponseList.add(new TopSellingResponse(R.drawable.fruits, "Fruits", "Kg", 1, 200));
-        topSellingResponseList.add(new TopSellingResponse(R.drawable.fruits, "Fruits", "Kg", 1, 200));
 
-        topSellingAdapter = new TopSellingAdapter(topSellingResponseList, getContext());
-        topSellingRecyclerView.setAdapter(topSellingAdapter);
+        RetrofitClient.getRetrofitClient(getContext()).getTopSelling(1).enqueue(new Callback<TopSellingResponse>() {
+            @Override
+            public void onResponse(Call<TopSellingResponse> call, Response<TopSellingResponse> response) {
+                if (response.isSuccessful()){
+                    topSellingResponse = response.body();
+                    topSellingAdapter = new TopSellingAdapter(topSellingResponse, getContext());
+                    topSellingRecyclerView.setAdapter(topSellingAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TopSellingResponse> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -97,16 +104,21 @@ public class HomeFragment extends Fragment {
         categoriesRecyclerView = view.findViewById(R.id.categoriesRecyclerView);
         categoriesRecyclerView.setHasFixedSize(true);
         categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        categoryResponseList = new ArrayList<>();
-        categoryResponseList.add(new CategoryResponse("Fruits", R.drawable.fruits));
-        categoryResponseList.add(new CategoryResponse("Dairy", R.drawable.dairy));
-        categoryResponseList.add(new CategoryResponse("Vegetables", R.drawable.vegetables));
-        categoryResponseList.add(new CategoryResponse("Fishes", R.drawable.fishes));
-        categoryResponseList.add(new CategoryResponse("Meat", R.drawable.meat));
-        categoryResponseList.add(new CategoryResponse("Beverages", R.drawable.vegetables));
-        categoryResponseList.add(new CategoryResponse("Baby Food", R.drawable.fruits));
-        categoryResponseList.add(new CategoryResponse("Snacks", R.drawable.vegetables));
-        categoryAdapter = new CategoryAdapter(getContext(), categoryResponseList);
-        categoriesRecyclerView.setAdapter(categoryAdapter);
+
+        RetrofitClient.getRetrofitClient(getContext()).getCategories().enqueue(new Callback<CategoryResponse>() {
+            @Override
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    categoryResponse = response.body();
+                    categoryAdapter = new CategoryAdapter(getContext(), categoryResponse);
+                    categoriesRecyclerView.setAdapter(categoryAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

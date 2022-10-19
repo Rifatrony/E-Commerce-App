@@ -1,28 +1,35 @@
 package com.rony.e_commerceapp.Response;
 
+import java.util.ArrayList;
+
 public class CategoryResponse {
 
-    String name;
-    int image;
+    public Categories categories;
 
-    public CategoryResponse(String name, int image) {
-        this.name = name;
-        this.image = image;
+    public CategoryResponse(Categories categories) {
+        this.categories = categories;
     }
 
-    public String getName() {
-        return name;
+    public class Categories{
+        public ArrayList<Datum> data;
+        public Pagination pagination;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public class Datum{
+        public String name;
+        public String slug;
+        public String icon;
+        public String image;
+        public Object description;
+        public Object parent;
+        public ArrayList<Object> child;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public class Pagination{
+        public int total;
+        public int count;
+        public int per_page;
+        public int current_page;
+        public int total_pages;
     }
 }

@@ -1,56 +1,39 @@
 package com.rony.e_commerceapp.Response;
 
+import java.util.ArrayList;
+
 public class TopSellingResponse {
 
-    int image;
-    String name, unit;
-    double amount, price;
+    public Products products;
 
-    public TopSellingResponse(int image, String name, String unit, double amount, double price) {
-        this.image = image;
-        this.name = name;
-        this.unit = unit;
-        this.amount = amount;
-        this.price = price;
+    public TopSellingResponse(Products products) {
+        this.products = products;
     }
 
-    public int getImage() {
-        return image;
+    public class Datum{
+        public String id;
+        public String name;
+        public String slug;
+        public String thumbnail;
+        public String discount;
+        public String price;
+        public double discounted_price;
+        public boolean has_attribute;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public class Pagination{
+        public int total;
+        public int count;
+        public int per_page;
+        public int current_page;
+        public int total_pages;
     }
 
-    public String getName() {
-        return name;
+    public class Products{
+        public ArrayList<Datum> data;
+        public Pagination pagination;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getUnit() {
-        return unit;
-    }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

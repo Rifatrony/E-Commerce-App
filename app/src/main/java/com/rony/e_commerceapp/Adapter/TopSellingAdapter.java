@@ -27,11 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.TopSellingViewHolder> {
 
-    List<TopSellingResponse> topSellingResponseList;
+    TopSellingResponse topSellingResponse;
     Context context;
 
-    public TopSellingAdapter(List<TopSellingResponse> topSellingResponseList, Context context) {
-        this.topSellingResponseList = topSellingResponseList;
+    public TopSellingAdapter(TopSellingResponse topSellingResponse, Context context) {
+        this.topSellingResponse = topSellingResponse;
         this.context = context;
     }
 
@@ -45,21 +45,32 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull TopSellingViewHolder holder, int position) {
-        TopSellingResponse response = topSellingResponseList.get(position);
-        holder.nameTextView.setText(response.getName());
-        holder.priceTextView.setText(String.valueOf(response.getPrice())+ " Tk.");
-        holder.unitTextView.setText(response.getUnit());
-        holder.amountTextView.setText(String.valueOf(response.getAmount()));
-        Glide.with(context).load(response.getImage()).into(holder.imageView);
+        if (topSellingResponse.products.data.size()>0){
+            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
+            holder.priceTextView.setText(topSellingResponse.products.data.get(position).price);
+            holder.discountTextView.setText(topSellingResponse.products.data.get(position).discount + " %");
 
-        holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
+            /*holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
+            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
+            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
+            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, ProductDetailsActivity.class));
-            }
-        });
+            holder.priceTextView.setText(String.valueOf(response.getPrice())+ " Tk.");
+            holder.unitTextView.setText(response.getUnit());
+            holder.amountTextView.setText(String.valueOf(response.getAmount()));*/
+
+            Glide.with(context).load(topSellingResponse.products.data.get(position).thumbnail).into(holder.imageView);
+
+            holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, ProductDetailsActivity.class));
+                }
+            });
+        }
+
 
     }
 
@@ -79,7 +90,7 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
 
     @Override
     public int getItemCount() {
-        return topSellingResponseList.size();
+        return topSellingResponse.products.data.size();
     }
 
     public class TopSellingViewHolder extends RecyclerView.ViewHolder {
@@ -95,8 +106,6 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
             imageView = itemView.findViewById(R.id.imageView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
-            unitTextView = itemView.findViewById(R.id.unitTextView);
-            amountTextView = itemView.findViewById(R.id.amountTextView);
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
             discountTextView = itemView.findViewById(R.id.discountTextView);
 
