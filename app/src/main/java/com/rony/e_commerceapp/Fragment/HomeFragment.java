@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Adapter.CategoryAdapter;
 import com.rony.e_commerceapp.Adapter.SliderAdapter;
 import com.rony.e_commerceapp.Adapter.TopSellingAdapter;
@@ -22,6 +23,10 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class HomeFragment extends Fragment {
 
@@ -31,7 +36,7 @@ public class HomeFragment extends Fragment {
     List<CategoryResponse> categoryResponseList;
 
     SliderView sliderView;
-    List<SliderResponse> sliderResponseList;
+    SliderResponse sliderResponse;
     SliderAdapter sliderAdapter;
 
     RecyclerView topSellingRecyclerView;
@@ -67,18 +72,25 @@ public class HomeFragment extends Fragment {
     }
 
     private void setSlider() {
-        sliderResponseList = new ArrayList<>();
-        sliderResponseList.add(new SliderResponse(R.drawable.fruits));
-        sliderResponseList.add(new SliderResponse(R.drawable.vegetables));
-        sliderResponseList.add(new SliderResponse(R.drawable.fishes));
-        sliderResponseList.add(new SliderResponse(R.drawable.dairy));
+        RetrofitClient.getRetrofitClient(getContext()).getBanner().enqueue(new Callback<SliderResponse>() {
+            @Override
+            public void onResponse(Call<SliderResponse> call, Response<SliderResponse> response) {
+                if (response.isSuccessful()){
+                    sliderResponse = response.body();
+                    sliderAdapter = new SliderAdapter(sliderResponse, getContext());
 
-        sliderAdapter = new SliderAdapter(sliderResponseList, getContext());
+                    sliderView = view.findViewById(R.id.slider);
+                    sliderView.setSliderAdapter(sliderAdapter);
+                    sliderView.setAutoCycle(true);
+                    sliderView.startAutoCycle();
+                }
+            }
 
-        sliderView = view.findViewById(R.id.slider);
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setAutoCycle(true);
-        sliderView.startAutoCycle();
+            @Override
+            public void onFailure(Call<SliderResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setCategory() {

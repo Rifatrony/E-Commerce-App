@@ -1,21 +1,19 @@
 package com.rony.e_commerceapp.Response;
 
+import java.util.ArrayList;
+
 public class SliderResponse {
 
-    int image;
 
-    public SliderResponse() {
+    public ArrayList<Datum> data;
+
+    public SliderResponse(ArrayList<Datum> data) {
+        this.data = data;
     }
 
-    public SliderResponse(int image) {
-        this.image = image;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public class Datum{
+        public String title;
+        public String url;
+        public String image;
     }
 }

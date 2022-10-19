@@ -18,11 +18,11 @@ import java.util.List;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterViewHolder> {
 
-    List<SliderResponse> mSliderItems;
+    SliderResponse sliderResponse;
     Context context;
 
-    public SliderAdapter(List<SliderResponse> mSliderItems, Context context) {
-        this.mSliderItems = mSliderItems;
+    public SliderAdapter(SliderResponse sliderResponse, Context context) {
+        this.sliderResponse = sliderResponse;
         this.context = context;
     }
 
@@ -34,18 +34,20 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
 
     @Override
     public void onBindViewHolder(SliderAdapterViewHolder viewHolder, int position) {
-        SliderResponse sliderItem = mSliderItems.get(position);
+        if (sliderResponse.data.size()>0){
+            Glide.with(context)
+                    .load(sliderResponse.data.get(position).image)
+                    .into(viewHolder.myimage);
+        }
 
         // Glide is use to load image
         // from url in your imageview.
-        Glide.with(context)
-                .load(sliderItem.getImage())
-                .into(viewHolder.myimage);
+
     }
 
     @Override
     public int getCount() {
-        return mSliderItems.size();
+        return sliderResponse.data.size();
     }
 
     public static class SliderAdapterViewHolder extends SliderViewAdapter.ViewHolder {
