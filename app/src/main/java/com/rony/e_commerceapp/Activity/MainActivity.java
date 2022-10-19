@@ -144,6 +144,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.cartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+            }
+        });
+
     }
 
     private void replaceFragment(Fragment fragment){
