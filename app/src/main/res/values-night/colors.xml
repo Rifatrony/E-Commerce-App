@@ -18,7 +18,6 @@
     <color name="primary_button_background_color">#FB94B7</color>
     <color name="secondary_button_background_color">#000</color>
 
-    <color name="tint_color">#000</color>
-
+    <color name="tint_color">#fff</color>
 
 </resources>
