@@ -46,7 +46,9 @@ public class RetrofitClient {
                 }
             }).build();
 
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
             retrofit = new Retrofit.Builder()
                     .client(okHttpClient)

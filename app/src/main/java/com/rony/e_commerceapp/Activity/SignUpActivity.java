@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.API.RetrofitClientWithoutHeader;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.databinding.ActivitySignUpBinding;
@@ -82,18 +83,30 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         else {
-            SignUp();
+            SignUp(name, email, phone, password, confirm_password, device_name);
+
+
         }
 
 
     }
 
-    private void SignUp() {
-        RetrofitClient.getRetrofitClient(this).sendUserData(name, email, phone, password, confirm_password, device_name, "" ).enqueue(new Callback<RegistrationResponse>() {
+    private void SignUp(String name, String email, String phone, String password, String confirm_password, String device_name) {
+
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(phone);
+        System.out.println(password);
+        System.out.println(confirm_password);
+
+        RetrofitClientWithoutHeader.getRetrofitClient().sendUserData(name, email, phone, password, confirm_password, device_name, "" ).enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()){
-                    Intent intent = new Intent(getApplicationContext(), OtpActivity.class);
+
+                    showToast("OTP send to your phone");
+
+                    Intent intent = new Intent(SignUpActivity.this, OtpActivity.class);
                     intent.putExtra("name", name);
                     intent.putExtra("email", email);
                     intent.putExtra("phone", phone);
@@ -106,7 +119,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-
+                showToast(t.getMessage());
+                System.out.println(t.getMessage());
             }
         });
     }

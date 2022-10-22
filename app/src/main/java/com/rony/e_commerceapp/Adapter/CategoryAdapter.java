@@ -1,6 +1,7 @@
 package com.rony.e_commerceapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.rony.e_commerceapp.Activity.CategoryWiseProductActivity;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.CategoryResponse;
 
@@ -42,6 +44,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             Glide.with(context)
                     .load(response.categories.data.get(position).image)
                     .into(holder.imageView);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent =new Intent(context, CategoryWiseProductActivity.class);
+                    intent.putExtra("slug", response.categories.data.get(position).slug);
+                    intent.putExtra("name", response.categories.data.get(position).name);
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

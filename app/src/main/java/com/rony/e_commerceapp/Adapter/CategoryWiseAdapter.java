@@ -2,7 +2,6 @@ package com.rony.e_commerceapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rony.e_commerceapp.Activity.ProductDetailsActivity;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 
@@ -23,28 +20,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapter.CategoryWiseViewHolder> {
 
-public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.TopSellingViewHolder> {
-
-    TopSellingResponse topSellingResponse;
     Context context;
+    TopSellingResponse topSellingResponse;
 
-    public TopSellingAdapter(TopSellingResponse topSellingResponse, Context context) {
-        this.topSellingResponse = topSellingResponse;
+    public CategoryWiseAdapter(Context context, TopSellingResponse topSellingResponse) {
         this.context = context;
+        this.topSellingResponse = topSellingResponse;
     }
 
     @NonNull
     @Override
-    public TopSellingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.top_selling_layout, parent, false);
-        return new TopSellingViewHolder(view);
+    public CategoryWiseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.category_wise_product_layout, parent, false);
+        return new CategoryWiseViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull TopSellingViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CategoryWiseViewHolder holder, int position) {
         if (topSellingResponse.products.data.size()>0){
             holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
             holder.priceTextView.setText(topSellingResponse.products.data.get(position).price);
@@ -52,22 +47,9 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
 
             Glide.with(context).load(topSellingResponse.products.data.get(position).thumbnail).into(holder.imageView);
 
-            holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
+           // holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, ProductDetailsActivity.class);
-                    intent.putExtra("name", topSellingResponse.products.data.get(position).name);
-                    intent.putExtra("thumbnail", topSellingResponse.products.data.get(position).thumbnail);
-                    intent.putExtra("discount", topSellingResponse.products.data.get(position).discount);
-                    intent.putExtra("price", topSellingResponse.products.data.get(position).price);
-                    context.startActivity(intent);
-                }
-            });
         }
-
-
     }
 
     private int getRandomColor() {
@@ -97,14 +79,14 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
         return topSellingResponse.products.data.size();
     }
 
-    public class TopSellingViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoryWiseViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView nameTextView, priceTextView, unitTextView, amountTextView, discountTextView;
 
         CardView constraintLayout;
 
-        public TopSellingViewHolder(@NonNull View itemView) {
+        public CategoryWiseViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView);

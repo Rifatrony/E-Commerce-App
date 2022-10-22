@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_cart:
-                        Toast.makeText(MainActivity.this, "CartActivity", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), CartActivity.class));
                         break;
 
                     case R.id.nav_order:

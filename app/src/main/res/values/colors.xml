@@ -20,5 +20,16 @@
 
     <color name="tint_color">#000</color>
 
+    <color name="random_color">#FFF</color>
+    <color name="random_color1">#9EFB32</color>
+    <color name="random_color2">#FB94B7</color>
+    <color name="random_color3">#A2F6A6</color>
+    <color name="random_color4">#8B9CFF</color>
+    <color name="random_color5">#027BB1</color>
+    <color name="random_color6">#FBCB84</color>
+    <color name="random_color7">#FD7348</color>
+    <color name="random_color8">#58F4E6</color>
+    <color name="random_color9">#FF7F75</color>
+
 
 </resources>

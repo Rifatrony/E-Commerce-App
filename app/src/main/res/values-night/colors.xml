@@ -14,10 +14,22 @@
     <color name="edit_text_background">#FDD08C</color>
     <color name="secondary_edit_text_background">#E8FBE9</color>
     <color name="primary_text_color">#000</color>
-    <color name="text_color">#000</color>
+    <color name="text_color">#fff</color>
     <color name="primary_button_background_color">#FB94B7</color>
     <color name="secondary_button_background_color">#000</color>
 
     <color name="tint_color">#fff</color>
+
+    <color name="random_color">#7D818A</color>
+    <color name="random_color1">#456E15</color>
+    <color name="random_color2">#9E4C68</color>
+    <color name="random_color3">#3C7C3F</color>
+    <color name="random_color4">#5A65AA</color>
+    <color name="random_color5">#275970</color>
+    <color name="random_color6">#8C6E41</color>
+    <color name="random_color7">#9E4326</color>
+    <color name="random_color8">#379F96</color>
+    <color name="random_color9">#9C4B45</color>
+
 
 </resources>
