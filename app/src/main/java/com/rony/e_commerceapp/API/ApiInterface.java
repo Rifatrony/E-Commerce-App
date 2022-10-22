@@ -1,6 +1,7 @@
 package com.rony.e_commerceapp.API;
 
 import com.rony.e_commerceapp.Response.CategoryResponse;
+import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 
@@ -27,7 +28,7 @@ public interface ApiInterface {
             @Field("otp") String otp
     );
 
-
+*/
     @FormUrlEncoded
     @POST("auth/user/registration")
     Call<RegistrationResponse> sendUserData(
@@ -38,7 +39,7 @@ public interface ApiInterface {
             @Field("password_confirmation") String confirmPassword,
             @Field("device_name") String device_name,
             @Field("otp") String otp
-    );*/
+    );
 
     @GET("category/index")
     Call<CategoryResponse> getCategories();

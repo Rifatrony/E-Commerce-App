@@ -67,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 int id = item.getItemId();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                drawerLayout.closeDrawer(GravityCompat.END);
 
 
                 switch (id){
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_logout:
-                        Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                        Logout();
                         break;
 
                     case R.id.nav_share:
@@ -151,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void Logout() {
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     private void replaceFragment(Fragment fragment){

@@ -44,20 +44,11 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull TopSellingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopSellingViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (topSellingResponse.products.data.size()>0){
             holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
             holder.priceTextView.setText(topSellingResponse.products.data.get(position).price);
             holder.discountTextView.setText(topSellingResponse.products.data.get(position).discount + " %");
-
-            /*holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
-            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
-            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
-            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
-
-            holder.priceTextView.setText(String.valueOf(response.getPrice())+ " Tk.");
-            holder.unitTextView.setText(response.getUnit());
-            holder.amountTextView.setText(String.valueOf(response.getAmount()));*/
 
             Glide.with(context).load(topSellingResponse.products.data.get(position).thumbnail).into(holder.imageView);
 
@@ -66,7 +57,12 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    context.startActivity(new Intent(context, ProductDetailsActivity.class));
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    intent.putExtra("name", topSellingResponse.products.data.get(position).name);
+                    intent.putExtra("thumbnail", topSellingResponse.products.data.get(position).thumbnail);
+                    intent.putExtra("discount", topSellingResponse.products.data.get(position).discount);
+                    intent.putExtra("price", topSellingResponse.products.data.get(position).price);
+                    context.startActivity(intent);
                 }
             });
         }

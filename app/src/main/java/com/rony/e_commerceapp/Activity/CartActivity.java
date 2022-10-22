@@ -42,8 +42,8 @@ public class CartActivity extends AppCompatActivity {
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         cartResponseList= new ArrayList<>();
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1 Kg"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1 Kg"));
+        cartResponseList.add(new CartResponse(R.drawable.fruits, "Ekel Green Tea AHA BHA PHA Brightening Toner (250ml)", "380", "1 Kg"));
+        cartResponseList.add(new CartResponse(R.drawable.fruits, "TRESemme Keratin Smooth Shampoo, 400ml", "380", "1 Kg"));
         cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1 Kg"));
         cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1 Kg"));
 
