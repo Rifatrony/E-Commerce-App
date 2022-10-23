@@ -20,7 +20,8 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
 
     ActivitySignUpBinding binding;
-    String name, email, phone, password, confirm_password, device_name = "redmi";
+
+    String name, email, number, password, confirm_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,13 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
+        binding.haveAccountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
 
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,34 +49,32 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void checkValidation() {
-        name = binding.nameEditText.getText().toString();
-        email = binding.emailEditText.getText().toString();
-        phone = binding.numberEditText.getText().toString();
-        password = binding.passwordEditText.getText().toString();
-        confirm_password = binding.confirmPasswordEditText.getText().toString();
+        name = binding.nameEditText.getText().toString().trim();
+        email = binding.emailEditText.getText().toString().trim();
+        number = binding.numberEditText.getText().toString().trim();
+        password = binding.passwordEditText.getText().toString().trim();
+        confirm_password = binding.confirmPasswordEditText.getText().toString().trim();
+
 
         if (name.isEmpty()){
-            showToast("Name Required");
+            showToast("Enter Name");
             return;
         }
+
 
         if (email.isEmpty()){
-            showToast("Email Required");
+            showToast("Enter Email");
             return;
         }
 
-        if (phone.isEmpty()){
-            showToast("Number Required");
+
+        if (number.isEmpty()){
+            showToast("Enter Number");
             return;
         }
 
         if (password.isEmpty()){
-            showToast("Password Required");
-            return;
-        }
-
-        if (password.length()<8){
-            showToast("Minimum password is 8");
+            showToast("Enter Password");
             return;
         }
 
@@ -77,50 +82,40 @@ public class SignUpActivity extends AppCompatActivity {
             showToast("Confirm Password");
             return;
         }
+
         if (!password.equals(confirm_password)){
-            showToast("Password and Confirm Password Should be Same");
+            showToast("Password and confirm password should be same");
             return;
         }
-
         else {
-            SignUp(name, email, phone, password, confirm_password, device_name);
-
-
+            SignUpNewUser();
         }
-
 
     }
 
-    private void SignUp(String name, String email, String phone, String password, String confirm_password, String device_name) {
-
-        System.out.println(name);
-        System.out.println(email);
-        System.out.println(phone);
-        System.out.println(password);
-        System.out.println(confirm_password);
-
-        RetrofitClientWithoutHeader.getRetrofitClient().sendUserData(name, email, phone, password, confirm_password, device_name, "" ).enqueue(new Callback<RegistrationResponse>() {
+    private void SignUpNewUser() {
+        showToast("Clicked");
+        RetrofitClient.getRetrofitClient(this).sendUserData(name,email, number, password, confirm_password, "", "").enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()){
 
                     showToast("OTP send to your phone");
 
-                    Intent intent = new Intent(SignUpActivity.this, OtpActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), OtpActivity.class);
                     intent.putExtra("name", name);
                     intent.putExtra("email", email);
-                    intent.putExtra("phone", phone);
+                    intent.putExtra("phone", number);
                     intent.putExtra("password", password);
-                    intent.putExtra("confirm_password", confirm_password);
-                    intent.putExtra("device_name", device_name);
+                    intent.putExtra("confirmPassword", confirm_password);
+                    intent.putExtra("device_name", "redmi");
                     startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-                showToast(t.getMessage());
-                System.out.println(t.getMessage());
+
             }
         });
     }
