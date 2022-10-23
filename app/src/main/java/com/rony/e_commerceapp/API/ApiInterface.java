@@ -1,6 +1,7 @@
 package com.rony.e_commerceapp.API;
 
 import com.rony.e_commerceapp.Response.CategoryResponse;
+import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
@@ -11,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -57,6 +59,16 @@ public interface ApiInterface {
     Call<TopSellingResponse> getCategoryWiseProduct(
             @Query("category") String category,
             @Query("page") int page
+    );
+
+    @GET("product/details/{slug}")
+    Call<ProductDetailsResponse> getProductDetails(
+            @Path("slug") String slug
+    );
+
+    @GET("product/products")
+    Call<TopSellingResponse> getRelatedProduct(
+            @Query("category") String Category
     );
 
 }

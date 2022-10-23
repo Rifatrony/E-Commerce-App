@@ -2,6 +2,7 @@ package com.rony.e_commerceapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.rony.e_commerceapp.Activity.ProductDetailsActivity2;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 
@@ -39,7 +41,7 @@ public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapte
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull CategoryWiseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryWiseViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (topSellingResponse.products.data.size()>0){
             holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
             holder.priceTextView.setText(topSellingResponse.products.data.get(position).price);
@@ -48,6 +50,16 @@ public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapte
             Glide.with(context).load(topSellingResponse.products.data.get(position).thumbnail).into(holder.imageView);
 
            // holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailsActivity2.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("slug", topSellingResponse.products.data.get(position).slug);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
