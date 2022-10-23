@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,6 +26,7 @@ public class CategoryWiseProductActivity extends AppCompatActivity {
     ActivityCategoryWiseProductBinding binding;
 
     String slug, name;
+    public int page = 1;
 
     TopSellingResponse topSellingResponse;
     RecyclerView categoriesRecyclerView;
@@ -40,6 +42,22 @@ public class CategoryWiseProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        binding.next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                page++;
+                fetchCategoryWiseProduct();
+            }
+        });
+
+        binding.previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                page--;
+                fetchCategoryWiseProduct();
             }
         });
 
@@ -67,14 +85,57 @@ public class CategoryWiseProductActivity extends AppCompatActivity {
             }
         });*/
 
-        RetrofitClient.getRetrofitClient(this).getCategoryWiseProduct(slug, 1).enqueue(new Callback<TopSellingResponse>() {
+        fetchCategoryWiseProduct();
+
+    }
+
+    private void fetchCategoryWiseProduct() {
+        RetrofitClient.getRetrofitClient(this).getCategoryWiseProduct(slug, page).enqueue(new Callback<TopSellingResponse>() {
+            @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
             @Override
             public void onResponse(Call<TopSellingResponse> call, Response<TopSellingResponse> response) {
                 if (response.isSuccessful()){
                     topSellingResponse = response.body();
-                    categoryWiseAdapter = new CategoryWiseAdapter(getApplicationContext(), topSellingResponse);
-                    categoriesRecyclerView.setAdapter(categoryWiseAdapter);
+
+                    System.out.println("current page is ----- >" + topSellingResponse.products.pagination.current_page);
+
+                    binding.pageNumberTextView.setText(topSellingResponse.products.pagination.current_page
+                            + " of " + topSellingResponse.products.pagination.total_pages);
+                    System.out.println("Total page is : " + topSellingResponse.products.pagination.total_pages);
+
+
+                    /*categoryWiseAdapter = new CategoryWiseAdapter(getApplicationContext(), topSellingResponse);
+                    categoriesRecyclerView.setAdapter(categoryWiseAdapter);*/
                     binding.paginationLayout.setVisibility(View.VISIBLE);
+
+
+                    if (topSellingResponse.products.pagination.current_page == page){
+                        categoryWiseAdapter = new CategoryWiseAdapter(getApplicationContext(), topSellingResponse);
+                        categoriesRecyclerView.setAdapter(categoryWiseAdapter);
+                        categoryWiseAdapter.notifyDataSetChanged();
+                        binding.previous.setEnabled(true);
+                        binding.previous.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    }
+
+                    if (topSellingResponse.products.pagination.current_page == 1){
+                        System.out.println("This is the first page");
+                        binding.previous.setEnabled(false);
+                    }
+
+                    if (topSellingResponse.products.pagination.total_pages > 1){
+                        System.out.println(String.valueOf(page + 1) + " is the next page");
+                        categoryWiseAdapter = new CategoryWiseAdapter(getApplicationContext(), topSellingResponse);
+                        categoriesRecyclerView.setAdapter(categoryWiseAdapter);
+                        categoryWiseAdapter.notifyDataSetChanged();
+                        binding.next.setEnabled(true);
+                    }
+
+                    if (topSellingResponse.products.pagination.total_pages == topSellingResponse.products.pagination.current_page){
+                        System.out.println("This is the last page");
+                        binding.next.setEnabled(false);
+                    }
+
+
                 }
             }
 
