@@ -6,7 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#F3F0F0</color>
 
     <color name="background">#E9F5FA</color>
     <color name="green_text_color">#1E8122</color>
@@ -30,6 +30,9 @@
     <color name="random_color7">#9E4326</color>
     <color name="random_color8">#379F96</color>
     <color name="random_color9">#9C4B45</color>
+
+
+    <color name="shimmer_color">#B6B7B8</color>
 
 
 </resources>

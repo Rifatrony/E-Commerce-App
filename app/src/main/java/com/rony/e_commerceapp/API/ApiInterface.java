@@ -7,6 +7,8 @@ import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -63,6 +65,11 @@ public interface ApiInterface {
 
     @GET("product/details/{slug}")
     Call<ProductDetailsResponse> getProductDetails(
+            @Path("slug") String slug
+    );
+
+    @GET("product/details/{slug}")
+    Call<List<ProductDetailsResponse>> getProductImageSlider(
             @Path("slug") String slug
     );
 

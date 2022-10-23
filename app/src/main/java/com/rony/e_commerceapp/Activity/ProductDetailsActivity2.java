@@ -8,15 +8,19 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.Adapter.ProductImageSliderAdapter;
 import com.rony.e_commerceapp.Adapter.RelatedProductAdapter;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 import com.rony.e_commerceapp.databinding.ActivityProductDetails2Binding;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +40,9 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
     TopSellingResponse topSellingResponse;
     RecyclerView relatedProductRecyclerView;
     RelatedProductAdapter relatedProductAdapter;
+
+    ProductImageSliderAdapter sliderAdapter;
+    List<ProductDetailsResponse> productDetailsResponseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,8 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
                     binding.mainLayout.setVisibility(View.VISIBLE);
 
                     productDetailsResponse = response.body();
-                    Glide.with(getApplicationContext()).load(productDetailsResponse.thumbnail).into(binding.sliderImageView);
+
+                    //Glide.with(getApplicationContext()).load(productDetailsResponse.thumbnail).into(binding.sliderImageView);
                     Glide.with(getApplicationContext()).load(productDetailsResponse.brand.image).into(binding.brandImage);
                     binding.productNameTextView.setText(productDetailsResponse.name);
                     binding.productPriceTextView.setText(String.valueOf(productDetailsResponse.final_price) + " Tk.");
@@ -104,6 +112,23 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
             @Override
             public void onFailure(Call<ProductDetailsResponse> call, Throwable t) {
 
+            }
+        });
+
+        RetrofitClient.getRetrofitClient(this).getProductImageSlider(slug).enqueue(new Callback<List<ProductDetailsResponse>>() {
+            @Override
+            public void onResponse(Call<List<ProductDetailsResponse>> call, Response<List<ProductDetailsResponse>> response) {
+                if (response.isSuccessful()){
+                    productDetailsResponseList = response.body();
+                    Toast.makeText(ProductDetailsActivity2.this, "Size is : " + productDetailsResponseList.size(), Toast.LENGTH_SHORT).show();
+                    sliderAdapter = new ProductImageSliderAdapter(getApplicationContext(), productDetailsResponseList);
+                    binding.sliderImageView.setSliderAdapter(sliderAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductDetailsResponse>> call, Throwable t) {
+                Toast.makeText(ProductDetailsActivity2.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

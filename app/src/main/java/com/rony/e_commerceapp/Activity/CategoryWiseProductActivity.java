@@ -38,6 +38,8 @@ public class CategoryWiseProductActivity extends AppCompatActivity {
         binding = ActivityCategoryWiseProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.shimmerLayout.startShimmer();
+
         binding.imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +97,11 @@ public class CategoryWiseProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TopSellingResponse> call, Response<TopSellingResponse> response) {
                 if (response.isSuccessful()){
+
+                    binding.shimmerLayout.stopShimmer();
+                    binding.shimmerLayout.setVisibility(View.GONE);
+                    binding.nestedScrollView.setVisibility(View.VISIBLE);
+
                     topSellingResponse = response.body();
 
                     System.out.println("current page is ----- >" + topSellingResponse.products.pagination.current_page);

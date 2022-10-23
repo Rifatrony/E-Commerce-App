@@ -1,204 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/sliderImageView"
-        android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:background="@drawable/shimmer_rectangle_background"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/productName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shimmer_rectangle_background"
-        android:layout_margin="10dp"
-        android:paddingStart="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/text_color"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sliderImageView" />
+       <ImageView
+           android:id="@+id/ImageView"
+           android:layout_width="match_parent"
+           android:layout_height="170dp"
+           android:background="@drawable/shimmer_rectangle_background"
+           android:layout_margin="10dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/productNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shimmer_rectangle_background"
-        android:layout_margin="10dp"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/random_color4"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/productName" />
+       <TextView
+           android:id="@+id/name"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:background="@drawable/shimmer_rectangle_background"
+           android:layout_margin="10dp"
+           android:paddingStart="10dp"
+           android:paddingTop="10dp"
+           android:paddingEnd="10dp"
+           android:textColor="@color/text_color"
+           android:textStyle="bold"
+           android:textSize="16sp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.0"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/ImageView" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/brandLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/productNameTextView">
+       <TextView
+           android:id="@+id/productNameText"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:background="@drawable/shimmer_rectangle_background"
+           android:layout_margin="10dp"
+           android:paddingStart="10dp"
+           android:paddingTop="5dp"
+           android:paddingEnd="10dp"
+           android:paddingBottom="10dp"
+           android:textColor="@color/random_color4"
+           android:textStyle="bold"
+           android:textSize="18sp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.0"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/name" />
 
-        <ImageView
-            android:id="@+id/brandImage"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            app:tint="@color/tint_color"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:layout_margin="10dp"
-            android:layout_marginStart="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/brandConstrainLayout"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/productNameText">
 
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:layout_margin="10dp"
-            android:textColor="@color/text_color"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/brandImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.523" />
+           <ImageView
+               android:id="@+id/brandImageView"
+               android:layout_width="80dp"
+               android:layout_height="50dp"
+               app:tint="@color/tint_color"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:layout_margin="10dp"
+               android:layout_marginStart="30dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/categoryNameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:layout_margin="10dp"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/category"
-            app:layout_constraintTop_toTopOf="parent" />
+           <TextView
+               android:id="@+id/category"
+               android:layout_width="80dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="20dp"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:layout_margin="10dp"
+               android:textColor="@color/text_color"
+               android:textSize="15sp"
+               android:textStyle="bold"
+               android:padding="8dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/brandImageView"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.523" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+           <TextView
+               android:id="@+id/categoryNameText"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="10dp"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:layout_margin="10dp"
+               android:padding="8dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/category"
+               app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/priceLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brandLayout">
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/productPriceTextView"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:layout_margin="10dp"
-            android:textColor="@color/text_color"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/priceLayout"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/brandConstrainLayout">
 
-        <TextView
-            android:id="@+id/productDiscountPriceTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="32dp"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/productPriceTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+           <TextView
+               android:id="@+id/priceTextView"
+               android:layout_width="100dp"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:layout_marginStart="10dp"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:layout_margin="10dp"
+               android:textColor="@color/text_color"
+               android:textSize="18sp"
+               android:textStyle="bold"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+           <TextView
+               android:id="@+id/discountPriceTextView"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp"
+               android:layout_marginStart="32dp"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:padding="10dp"
+               android:textSize="18sp"
+               android:textStyle="bold"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/priceTextView"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cartLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/priceLayout">
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/countLayout"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:padding="32dp"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/cartLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/priceLayout">
 
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:padding="20dp"
-            android:textSize="16sp"
-            android:background="@drawable/shimmer_rectangle_background"
-            android:layout_margin="10dp"
-            android:textColor="@color/white"
-            android:elevation="0dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/countLayout"
-            app:layout_constraintTop_toTopOf="parent" />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:id="@+id/countLayout"
+               android:layout_width="100dp"
+               android:layout_height="wrap_content"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:padding="32dp"
+               android:layout_marginStart="10dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/relatedProduct"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shimmer_rectangle_background"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/text_color"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cartLayout" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+           <androidx.appcompat.widget.AppCompatButton
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="24dp"
+               android:padding="20dp"
+               android:textSize="16sp"
+               android:background="@drawable/shimmer_rectangle_background"
+               android:layout_margin="10dp"
+               android:textColor="@color/white"
+               android:elevation="0dp"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="10dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/countLayout"
+               app:layout_constraintTop_toTopOf="parent" />
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <TextView
+           android:id="@+id/relatedProduct"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:background="@drawable/shimmer_rectangle_background"
+           android:layout_margin="10dp"
+           android:textStyle="bold"
+           android:textSize="18sp"
+           android:textColor="@color/text_color"
+           android:padding="16dp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/cartLayout" />
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="250dp"
+           android:layout_marginTop="10dp"
+           android:paddingBottom="20dp"
+           app:layout_constraintTop_toBottomOf="@id/relatedProduct"
+           >
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card1"
+               android:layout_width="160dp"
+               android:layout_height="match_parent"
+               android:layout_marginStart="10dp"
+               android:layout_marginBottom="10dp"
+               app:cardBackgroundColor="@color/shimmer_color"
+               app:cardCornerRadius="16dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card2"
+               android:layout_width="160dp"
+               android:layout_height="match_parent"
+               app:cardBackgroundColor="@color/shimmer_color"
+               app:cardCornerRadius="16dp"
+               android:layout_marginBottom="10dp"
+               android:layout_marginStart="10dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/card1"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0" />
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card3"
+               android:layout_width="160dp"
+               android:layout_height="match_parent"
+               app:cardBackgroundColor="@color/shimmer_color"
+               app:cardCornerRadius="16dp"
+               android:layout_marginStart="10dp"
+               android:layout_marginBottom="10dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/card2"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0"
+               />
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
