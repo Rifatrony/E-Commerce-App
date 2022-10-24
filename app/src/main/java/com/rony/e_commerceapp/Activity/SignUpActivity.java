@@ -45,7 +45,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void checkValidation() {
@@ -61,12 +60,10 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-
         if (email.isEmpty()){
             showToast("Enter Email");
             return;
         }
-
 
         if (number.isEmpty()){
             showToast("Enter Number");
