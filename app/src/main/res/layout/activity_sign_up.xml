@@ -64,6 +64,7 @@
         android:layout_marginEnd="30dp"
         android:background="@drawable/primary_edittext_background"
         android:hint="Number"
+        android:inputType="number"
         android:padding="12dp"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"

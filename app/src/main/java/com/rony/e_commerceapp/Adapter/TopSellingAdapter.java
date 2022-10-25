@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rony.e_commerceapp.Activity.ProductDetailsActivity;
+import com.rony.e_commerceapp.Activity.ProductDetailsActivity2;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 
@@ -57,11 +58,12 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ProductDetailsActivity.class);
-                    intent.putExtra("name", topSellingResponse.products.data.get(position).name);
+                    Intent intent = new Intent(context, ProductDetailsActivity2.class);
+                    intent.putExtra("slug", topSellingResponse.products.data.get(position).slug);
+                    /*intent.putExtra("name", topSellingResponse.products.data.get(position).name);
                     intent.putExtra("thumbnail", topSellingResponse.products.data.get(position).thumbnail);
                     intent.putExtra("discount", topSellingResponse.products.data.get(position).discount);
-                    intent.putExtra("price", topSellingResponse.products.data.get(position).price);
+                    intent.putExtra("price", topSellingResponse.products.data.get(position).price);*/
                     context.startActivity(intent);
                 }
             });

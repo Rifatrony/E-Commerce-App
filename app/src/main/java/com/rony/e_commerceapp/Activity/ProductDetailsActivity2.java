@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Adapter.ProductImageSliderAdapter;
@@ -20,6 +23,7 @@ import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.TopSellingResponse;
 import com.rony.e_commerceapp.databinding.ActivityProductDetails2Binding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,8 +45,8 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
     RecyclerView relatedProductRecyclerView;
     RelatedProductAdapter relatedProductAdapter;
 
-    ProductImageSliderAdapter sliderAdapter;
-    List<ProductDetailsResponse> productDetailsResponseList;
+    ImageSlider imageSlider;
+    ArrayList<SlideModel> imageSliderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
 
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
+
+        imageSlider = findViewById(R.id.sliderImageView);
+        imageSliderList = new ArrayList<>();
 
         binding.imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +83,13 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
 
                     productDetailsResponse = response.body();
 
+                    imageSliderList.add(new SlideModel(productDetailsResponse.thumbnail, ScaleTypes.FIT));
+                    imageSliderList.add(new SlideModel(productDetailsResponse.image1, ScaleTypes.FIT));
+                    imageSliderList.add(new SlideModel(productDetailsResponse.image2, ScaleTypes.FIT));
+                    imageSliderList.add(new SlideModel(productDetailsResponse.image3, ScaleTypes.FIT));
+
+                    imageSlider.setImageList(imageSliderList);
+
                     //Glide.with(getApplicationContext()).load(productDetailsResponse.thumbnail).into(binding.sliderImageView);
                     Glide.with(getApplicationContext()).load(productDetailsResponse.brand.image).into(binding.brandImage);
                     binding.productNameTextView.setText(productDetailsResponse.name);
@@ -83,6 +97,7 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
                     binding.productDiscountPriceTextView.setText(productDetailsResponse.price + " Tk.");
                     binding.productDiscountPriceTextView.setPaintFlags(binding.productDiscountPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     binding.categoryNameTextView.setText(productDetailsResponse.category.name);
+
 
                     binding.amountTextView.setText(String.valueOf(count));
 
@@ -115,22 +130,9 @@ public class ProductDetailsActivity2 extends AppCompatActivity {
             }
         });
 
-        RetrofitClient.getRetrofitClient(this).getProductImageSlider(slug).enqueue(new Callback<List<ProductDetailsResponse>>() {
-            @Override
-            public void onResponse(Call<List<ProductDetailsResponse>> call, Response<List<ProductDetailsResponse>> response) {
-                if (response.isSuccessful()){
-                    productDetailsResponseList = response.body();
-                    Toast.makeText(ProductDetailsActivity2.this, "Size is : " + productDetailsResponseList.size(), Toast.LENGTH_SHORT).show();
-                    sliderAdapter = new ProductImageSliderAdapter(getApplicationContext(), productDetailsResponseList);
-                    binding.sliderImageView.setSliderAdapter(sliderAdapter);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<ProductDetailsResponse>> call, Throwable t) {
-                Toast.makeText(ProductDetailsActivity2.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
 
         binding.increaseCartImageView.setOnClickListener(new View.OnClickListener() {
             @Override

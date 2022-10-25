@@ -12,7 +12,7 @@
        <ImageView
            android:id="@+id/ImageView"
            android:layout_width="match_parent"
-           android:layout_height="170dp"
+           android:layout_height="300dp"
            android:background="@drawable/shimmer_rectangle_background"
            android:layout_margin="10dp"
            app:layout_constraintEnd_toEndOf="parent"

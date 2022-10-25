@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_categories:
-                        Toast.makeText(MainActivity.this, "AllCategoryActivity", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), OtpActivity.class)
+                        );
                         break;
 
                     case R.id.nav_cart:
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+   /* @Override
     protected void onStart() {
         super.onStart();
         Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
@@ -215,5 +216,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 }
