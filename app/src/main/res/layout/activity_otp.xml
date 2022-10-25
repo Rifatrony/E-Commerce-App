@@ -16,6 +16,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/verifyOtp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Verify OTP"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        />
+
+    <TextView
+        android:id="@+id/numberTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/text_color"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verifyOtp"/>
+
     <com.chaos.view.PinView
         android:id="@+id/pinView"
         style="@style/PinWidget.PinView"
@@ -33,14 +60,14 @@
         app:cursorWidth="1dp"
         app:hideLineWhenFilled="true"
         app:itemCount="6"
-        app:itemHeight="40dp"
+        app:itemHeight="50dp"
         app:itemRadius="4dp"
         app:itemSpacing="2dp"
-        app:itemWidth="40dp"
+        app:itemWidth="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/numberTextView"
         app:lineColor="@color/background"
         app:lineWidth="2dp"
         app:viewType="rectangle" />

@@ -22,11 +22,11 @@
 
             <ImageView
                 android:id="@+id/menuImageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
                 android:src="@drawable/menu"
                 app:tint="@color/tint_color"
-                android:layout_marginStart="20dp"
+                android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,9 +49,10 @@
 
             <ImageView
                 android:id="@+id/notificationImageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_marginEnd="10dp"
+                android:padding="16dp"
                 android:src="@drawable/ic_notifications"
                 app:tint="@color/tint_color"
                 app:layout_constraintBottom_toBottomOf="parent"

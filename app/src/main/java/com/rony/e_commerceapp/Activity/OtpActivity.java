@@ -2,12 +2,14 @@ package com.rony.e_commerceapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -30,6 +32,9 @@ public class OtpActivity extends AppCompatActivity {
     String MyOtp;
     SessionManagement sessionManagement;
 
+    TextView numberTextView;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,9 @@ public class OtpActivity extends AppCompatActivity {
         System.out.println("password is " + password);
         System.out.println("confirmPassword is " + confirmPassword);
         System.out.println("device_name is " + device_name);
+
+        numberTextView = findViewById(R.id.numberTextView);
+        numberTextView.setText("We Send a SMS to " + phone);
 
         sessionManagement = new SessionManagement(this);
 

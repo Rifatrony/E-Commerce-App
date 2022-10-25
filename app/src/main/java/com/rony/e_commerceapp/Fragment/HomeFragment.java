@@ -1,5 +1,6 @@
 package com.rony.e_commerceapp.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.Activity.CategoryActivity;
 import com.rony.e_commerceapp.Adapter.CategoryAdapter;
 import com.rony.e_commerceapp.Adapter.SliderAdapter;
 import com.rony.e_commerceapp.Adapter.TopSellingAdapter;
@@ -40,12 +43,22 @@ public class HomeFragment extends Fragment {
     CommonApiResponse commonApiResponse;
     TopSellingAdapter topSellingAdapter;
 
+    TextView seeAllCategoryTextView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        seeAllCategoryTextView = view.findViewById(R.id.seeAllCategoryTextView);
+
+        seeAllCategoryTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), CategoryActivity.class));
+            }
+        });
 
         setCategory();
         setSlider();
