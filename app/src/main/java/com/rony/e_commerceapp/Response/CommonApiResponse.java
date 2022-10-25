@@ -2,11 +2,11 @@ package com.rony.e_commerceapp.Response;
 
 import java.util.ArrayList;
 
-public class TopSellingResponse {
+public class CommonApiResponse {
 
     public Products products;
 
-    public TopSellingResponse(Products products) {
+    public CommonApiResponse(Products products) {
         this.products = products;
     }
 

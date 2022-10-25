@@ -4,7 +4,7 @@ import com.rony.e_commerceapp.Response.CategoryResponse;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
-import com.rony.e_commerceapp.Response.TopSellingResponse;
+import com.rony.e_commerceapp.Response.CommonApiResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
 
 import java.util.List;
@@ -53,12 +53,12 @@ public interface ApiInterface {
     Call<SliderResponse> getBanner();
 
     @GET("product/products")
-    Call<TopSellingResponse> getTopSelling(
+    Call<CommonApiResponse> getTopSelling(
             @Query("page") int page
     );
 
     @GET("product/products")
-    Call<TopSellingResponse> getCategoryWiseProduct(
+    Call<CommonApiResponse> getCategoryWiseProduct(
             @Query("category") String category,
             @Query("page") int page
     );
@@ -74,7 +74,7 @@ public interface ApiInterface {
     );
 
     @GET("product/products")
-    Call<TopSellingResponse> getRelatedProduct(
+    Call<CommonApiResponse> getRelatedProduct(
             @Query("category") String Category
     );
 

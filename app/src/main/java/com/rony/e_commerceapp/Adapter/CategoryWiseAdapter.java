@@ -14,9 +14,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rony.e_commerceapp.Activity.ProductDetailsActivity2;
+import com.rony.e_commerceapp.Activity.ProductDetailsActivity;
 import com.rony.e_commerceapp.R;
-import com.rony.e_commerceapp.Response.TopSellingResponse;
+import com.rony.e_commerceapp.Response.CommonApiResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,11 @@ import java.util.Random;
 public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapter.CategoryWiseViewHolder> {
 
     Context context;
-    TopSellingResponse topSellingResponse;
+    CommonApiResponse commonApiResponse;
 
-    public CategoryWiseAdapter(Context context, TopSellingResponse topSellingResponse) {
+    public CategoryWiseAdapter(Context context, CommonApiResponse commonApiResponse) {
         this.context = context;
-        this.topSellingResponse = topSellingResponse;
+        this.commonApiResponse = commonApiResponse;
     }
 
     @NonNull
@@ -42,21 +42,21 @@ public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CategoryWiseViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (topSellingResponse.products.data.size()>0){
-            holder.nameTextView.setText(topSellingResponse.products.data.get(position).name);
-            holder.priceTextView.setText(topSellingResponse.products.data.get(position).price);
-            holder.discountTextView.setText(topSellingResponse.products.data.get(position).discount + " %");
+        if (commonApiResponse.products.data.size()>0){
+            holder.nameTextView.setText(commonApiResponse.products.data.get(position).name);
+            holder.priceTextView.setText(commonApiResponse.products.data.get(position).price);
+            holder.discountTextView.setText(commonApiResponse.products.data.get(position).discount + " %");
 
-            Glide.with(context).load(topSellingResponse.products.data.get(position).thumbnail).into(holder.imageView);
+            Glide.with(context).load(commonApiResponse.products.data.get(position).thumbnail).into(holder.imageView);
 
            // holder.constraintLayout.setCardBackgroundColor(holder.itemView.getResources().getColor(getRandomColor(), null));
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ProductDetailsActivity2.class);
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("slug", topSellingResponse.products.data.get(position).slug);
+                    intent.putExtra("slug", commonApiResponse.products.data.get(position).slug);
                     context.startActivity(intent);
                 }
             });
@@ -88,7 +88,7 @@ public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapte
 
     @Override
     public int getItemCount() {
-        return topSellingResponse.products.data.size();
+        return commonApiResponse.products.data.size();
     }
 
     public static class CategoryWiseViewHolder extends RecyclerView.ViewHolder {

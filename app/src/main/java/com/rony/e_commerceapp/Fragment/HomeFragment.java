@@ -2,7 +2,6 @@ package com.rony.e_commerceapp.Fragment;
 
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Adapter.CategoryAdapter;
 import com.rony.e_commerceapp.Adapter.SliderAdapter;
@@ -19,11 +17,8 @@ import com.rony.e_commerceapp.Adapter.TopSellingAdapter;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.CategoryResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
-import com.rony.e_commerceapp.Response.TopSellingResponse;
+import com.rony.e_commerceapp.Response.CommonApiResponse;
 import com.smarteist.autoimageslider.SliderView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +37,7 @@ public class HomeFragment extends Fragment {
     SliderAdapter sliderAdapter;
 
     RecyclerView topSellingRecyclerView;
-    TopSellingResponse topSellingResponse;
+    CommonApiResponse commonApiResponse;
     TopSellingAdapter topSellingAdapter;
 
 
@@ -64,18 +59,18 @@ public class HomeFragment extends Fragment {
         topSellingRecyclerView.setHasFixedSize(true);
         topSellingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        RetrofitClient.getRetrofitClient(getContext()).getTopSelling(1).enqueue(new Callback<TopSellingResponse>() {
+        RetrofitClient.getRetrofitClient(getContext()).getTopSelling(1).enqueue(new Callback<CommonApiResponse>() {
             @Override
-            public void onResponse(Call<TopSellingResponse> call, Response<TopSellingResponse> response) {
+            public void onResponse(Call<CommonApiResponse> call, Response<CommonApiResponse> response) {
                 if (response.isSuccessful()){
-                    topSellingResponse = response.body();
-                    topSellingAdapter = new TopSellingAdapter(topSellingResponse, getContext());
+                    commonApiResponse = response.body();
+                    topSellingAdapter = new TopSellingAdapter(commonApiResponse, getContext());
                     topSellingRecyclerView.setAdapter(topSellingAdapter);
                 }
             }
 
             @Override
-            public void onFailure(Call<TopSellingResponse> call, Throwable t) {
+            public void onFailure(Call<CommonApiResponse> call, Throwable t) {
 
             }
         });

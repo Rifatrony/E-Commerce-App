@@ -7,8 +7,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,21 +18,11 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
-import com.rony.e_commerceapp.Adapter.CategoryAdapter;
-import com.rony.e_commerceapp.Adapter.SliderAdapter;
-import com.rony.e_commerceapp.Adapter.TopSellingAdapter;
 import com.rony.e_commerceapp.Fragment.FavouriteFragment;
 import com.rony.e_commerceapp.Fragment.HomeFragment;
 import com.rony.e_commerceapp.Fragment.ProfileFragment;
 import com.rony.e_commerceapp.R;
-import com.rony.e_commerceapp.Response.CategoryResponse;
-import com.rony.e_commerceapp.Response.SliderResponse;
-import com.rony.e_commerceapp.Response.TopSellingResponse;
 import com.rony.e_commerceapp.databinding.ActivityMainBinding;
-import com.smarteist.autoimageslider.SliderView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
