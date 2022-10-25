@@ -33,5 +33,8 @@
 
     <color name="shimmer_color">#A2A6AE</color>
 
+    <color name="cart_bottom_color">#A2F6A6</color>
+    <color name="cart_bottom_button_color">#00405C</color>
+
 
 </resources>

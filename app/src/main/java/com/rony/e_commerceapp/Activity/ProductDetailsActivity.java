@@ -19,7 +19,7 @@ import com.rony.e_commerceapp.Adapter.RelatedProductAdapter;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.CommonApiResponse;
-import com.rony.e_commerceapp.databinding.ActivityProductDetails2Binding;
+import com.rony.e_commerceapp.databinding.ActivityProductDetailsBinding;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    ActivityProductDetails2Binding binding;
+    ActivityProductDetailsBinding binding;
 
     ShimmerFrameLayout shimmerFrameLayout;
 
@@ -48,7 +48,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityProductDetails2Binding.inflate(getLayoutInflater());
+        binding = ActivityProductDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         slug = getIntent().getStringExtra("slug");
@@ -92,6 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     binding.productNameTextView.setText(productDetailsResponse.name);
                     binding.productPriceTextView.setText(String.valueOf(productDetailsResponse.final_price) + " Tk.");
                     binding.productDiscountPriceTextView.setText(productDetailsResponse.price + " Tk.");
+                    binding.discountPercentTextView.setText(productDetailsResponse.discount + " %");
                     binding.productDiscountPriceTextView.setPaintFlags(binding.productDiscountPriceTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     binding.categoryNameTextView.setText(productDetailsResponse.category.name);
 

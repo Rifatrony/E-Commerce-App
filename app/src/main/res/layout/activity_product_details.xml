@@ -17,9 +17,9 @@
 
         <ImageView
             android:id="@+id/imageBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:padding="16dp"
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,17 +96,48 @@
                 app:layout_constraintTop_toTopOf="parent" />-->
 
 
-
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/sliderImageView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:iss_auto_cycle="true"
-                app:iss_period="12000"
-                app:iss_delay="0"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/sliderImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:iss_auto_cycle="true"
+                    app:iss_delay="0"
+                    app:iss_period="12000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/discountPercentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5.00 %"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/shimmer_rectangle_background"
+                    android:backgroundTint="@color/random_color9"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
@@ -124,7 +155,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sliderImageView" />
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout3" />
 
             <TextView
                 android:id="@+id/productNameTextView"
@@ -226,6 +257,7 @@
                     app:layout_constraintStart_toEndOf="@+id/productPriceTextView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

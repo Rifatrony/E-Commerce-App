@@ -107,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
                     intent.putExtra("confirmPassword", confirm_password);
                     intent.putExtra("device_name", "redmi");
                     startActivity(intent);
+                    finish();
                 }
             }
 

@@ -1,10 +1,12 @@
 package com.rony.e_commerceapp.API;
 
 import com.rony.e_commerceapp.Response.CategoryResponse;
+import com.rony.e_commerceapp.Response.DeliveryMethodResponse;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.CommonApiResponse;
+import com.rony.e_commerceapp.Response.UserDetailsResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
 
 import java.util.List;
@@ -45,6 +47,14 @@ public interface ApiInterface {
             @Field("otp") String otp
     );
 
+    @FormUrlEncoded
+    @POST("auth/user/login")
+    Call<UserRegisterResponse> userLogin(
+            @Field("phone") String phone,
+            @Field("password") String password,
+            @Field("device_name") String device_name
+    );
+
     @GET("category/index")
     Call<CategoryResponse> getCategories();
 
@@ -77,5 +87,11 @@ public interface ApiInterface {
     Call<CommonApiResponse> getRelatedProduct(
             @Query("category") String Category
     );
+
+    @GET("checkout/delivery/methods")
+    Call<List<DeliveryMethodResponse>> getDeliveryCharge();
+
+    @GET("user/dashboard")
+    Call<UserDetailsResponse> getUserDetails();
 
 }

@@ -65,7 +65,7 @@ public class OtpActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() == 8){
+                if (charSequence.toString().length() == 6){
 
                     MyOtp = charSequence.toString();
                     CreateNewUser(MyOtp);
@@ -95,6 +95,7 @@ public class OtpActivity extends AppCompatActivity {
                     SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), email, password);
                     sessionManagement.setLoginSession(dataModel);
                     startActivity(intent);
+                    finish();
 
                 }
             }

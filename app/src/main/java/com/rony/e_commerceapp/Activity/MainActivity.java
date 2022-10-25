@@ -14,15 +14,23 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Fragment.FavouriteFragment;
 import com.rony.e_commerceapp.Fragment.HomeFragment;
 import com.rony.e_commerceapp.Fragment.ProfileFragment;
 import com.rony.e_commerceapp.R;
+import com.rony.e_commerceapp.Response.UserDetailsResponse;
+import com.rony.e_commerceapp.Session.SessionManagement;
 import com.rony.e_commerceapp.databinding.ActivityMainBinding;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     FrameLayout frameLayout;
+    UserDetailsResponse userDetailsResponse;
+    SessionManagement sessionManagement;
 
 
     @Override
@@ -45,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         frameLayout = findViewById(R.id.frameLayout);
+
+        sessionManagement = new SessionManagement(this);
 
         replaceFragment(new HomeFragment());
 
@@ -143,11 +155,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        RetrofitClient.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
+            @Override
+            public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
+                if (response.isSuccessful()){
+                    userDetailsResponse = response.body();
+                    System.out.println(userDetailsResponse.user.name);
+                    System.out.println(userDetailsResponse.user.address);
+                    System.out.println(userDetailsResponse.user.email);
+
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    View headerView = navigationView.getHeaderView(0);
+
+                    TextView navUserName = headerView.findViewById(R.id.user_name);
+                    TextView navUserEmail = headerView.findViewById(R.id.user_email);
+                    TextView navUserNumber = headerView.findViewById(R.id.user_phone);
+
+                    try {
+                        navUserName.setText(userDetailsResponse.user.name);
+                        navUserEmail.setText(userDetailsResponse.user.email);
+                        navUserNumber.setText(userDetailsResponse.user.phone);
+                    }
+                    catch (Exception e){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void Logout() {
+
+        sessionManagement.removeLoginSession();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
+
     }
 
     private void replaceFragment(Fragment fragment){
