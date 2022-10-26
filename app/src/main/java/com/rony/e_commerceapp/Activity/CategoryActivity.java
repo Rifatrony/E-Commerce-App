@@ -2,7 +2,9 @@ package com.rony.e_commerceapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
@@ -31,12 +33,15 @@ public class CategoryActivity extends AppCompatActivity {
         binding.allCategoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         RetrofitClient.getRetrofitClient(this).getCategories().enqueue(new Callback<CategoryResponse>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()){
                     categoryResponse = response.body();
                     allCategoriesAdapter = new AllCategoriesAdapter(getApplicationContext(), categoryResponse);
                     binding.allCategoriesRecyclerView.setAdapter(allCategoriesAdapter);
+
+                    allCategoriesAdapter.notifyDataSetChanged();
                 }
             }
 

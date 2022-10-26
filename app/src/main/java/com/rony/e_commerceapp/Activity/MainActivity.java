@@ -20,10 +20,12 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.Adapter.CartAdapter;
 import com.rony.e_commerceapp.Fragment.FavouriteFragment;
 import com.rony.e_commerceapp.Fragment.HomeFragment;
 import com.rony.e_commerceapp.Fragment.ProfileFragment;
 import com.rony.e_commerceapp.R;
+import com.rony.e_commerceapp.Response.CartResponse;
 import com.rony.e_commerceapp.Response.UserDetailsResponse;
 import com.rony.e_commerceapp.Session.SessionManagement;
 import com.rony.e_commerceapp.databinding.ActivityMainBinding;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
+    TextView cartSizeTextView;
+    CartResponse cartResponse;
 
     FrameLayout frameLayout;
     UserDetailsResponse userDetailsResponse;
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         frameLayout = findViewById(R.id.frameLayout);
+        cartSizeTextView = findViewById(R.id.cartSizeTextView);
 
         sessionManagement = new SessionManagement(this);
 
@@ -190,6 +195,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        countCartItem();
+
     }
 
     private void Logout() {
@@ -220,39 +227,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   /* @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
+    private void countCartItem(){
+        RetrofitClient.getRetrofitClient(this).getCartItem().enqueue(new Callback<CartResponse>() {
+            @Override
+            public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
+                if (response.isSuccessful()){
+                    cartResponse = response.body();
+                    cartSizeTextView.setText(String.valueOf(cartResponse.data.size()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
-    }*/
 }

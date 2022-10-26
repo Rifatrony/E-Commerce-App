@@ -56,6 +56,7 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
                     intent.putExtra("slug", commonApiResponse.products.data.get(position).slug);
+                    intent.putExtra("product_id", commonApiResponse.products.data.get(position).id);
                     /*intent.putExtra("name", topSellingResponse.products.data.get(position).name);
                     intent.putExtra("thumbnail", topSellingResponse.products.data.get(position).thumbnail);
                     intent.putExtra("discount", topSellingResponse.products.data.get(position).discount);

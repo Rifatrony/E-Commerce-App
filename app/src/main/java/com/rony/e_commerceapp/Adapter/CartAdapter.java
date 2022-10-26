@@ -22,14 +22,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     Context context;
-    List<CartResponse> cartResponseList;
+    CartResponse cartResponse;
 
     int count = 0;
     String amount;
 
-    public CartAdapter(Context context, List<CartResponse> cartResponseList) {
+    public CartAdapter(Context context, CartResponse cartResponse) {
         this.context = context;
-        this.cartResponseList = cartResponseList;
+        this.cartResponse = cartResponse;
     }
 
     @NonNull
@@ -39,14 +39,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return new CartViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.nameTextView.setText(cartResponseList.get(position).getName());
-        holder.priceTextView.setText(cartResponseList.get(position).getPrice());
-        holder.amountTextView.setText(cartResponseList.get(position).getAmount());
+        holder.nameTextView.setText(cartResponse.data.get(position).product.name);
+        holder.singlePriceTextView.setText(cartResponse.data.get(position).price + " Tk.");
+        holder.priceTextView.setText("Total: "+ cartResponse.data.get(position).total);
+        holder.amountTextView.setText(String.valueOf(cartResponse.data.get(position).quantity));
 
-        Glide.with(context).load(cartResponseList.get(position).getImage()).into(holder.cartImageView);
-        holder.increaseCartImageView.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).load(cartResponse.data.get(position).product.thumbnail).into(holder.cartImageView);
+        /*holder.increaseCartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 amount = cartResponseList.get(position).getAmount();
@@ -54,28 +56,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 count++;
                 System.out.println("Count is + " + count);
                 notifyDataSetChanged();
-                updatePrice();
+                //updatePrice();
             }
-        });
+        });*/
 
     }
 
     public void updatePrice(){
-        int sum = 0, i;
+        /*int sum = 0, i;
         for (i = 0; i < cartResponseList.size(); i++){
             sum = sum + (Integer.parseInt(cartResponseList.get(i).getPrice()) * Integer.parseInt(cartResponseList.get(i).getAmount()));
         }
-        System.out.println("Sum is : " + sum);
+        System.out.println("Sum is : " + sum);*/
     }
 
     @Override
     public int getItemCount() {
-        return cartResponseList.size();
+        return cartResponse.data.size();
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTextView, priceTextView, amountTextView;
+        TextView nameTextView, priceTextView, amountTextView, singlePriceTextView;
         CircleImageView cartImageView;
         ImageView increaseCartImageView, decreaseCartImageView;
 
@@ -84,6 +86,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
             cartImageView =itemView.findViewById(R.id.cartImageView);
             nameTextView =itemView.findViewById(R.id.nameTextView);
+            singlePriceTextView =itemView.findViewById(R.id.singlePriceTextView);
             priceTextView =itemView.findViewById(R.id.priceTextView);
             amountTextView =itemView.findViewById(R.id.amountTextView);
             increaseCartImageView =itemView.findViewById(R.id.increaseCartImageView);

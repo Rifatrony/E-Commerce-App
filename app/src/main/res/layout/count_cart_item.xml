@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/cartSizeTextView"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginTop="12dp"
@@ -23,7 +24,7 @@
         android:background="@drawable/round_image_background"
         android:backgroundTint="#F81504"
         android:padding="2dp"
-        android:text="10"
+        android:text="0"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="8sp"

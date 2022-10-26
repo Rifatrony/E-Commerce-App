@@ -57,9 +57,9 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="20dp"
-            android:layout_height="0dp"
-            android:padding="3dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="6dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/cancel"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,13 +71,15 @@
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/singlePriceTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="12sp"
+        android:textStyle="bold"
         android:textColor="@color/green_text_color"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:layout_marginTop="5dp"
         android:text="Product Details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,9 +90,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="6dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/singlePriceTextView">
 
         <TextView
             android:id="@+id/priceTextView"
@@ -111,7 +114,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:paddingStart="10dp"
             android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -119,39 +121,43 @@
 
             <ImageView
                 android:id="@+id/decreaseCartImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/round_image_background"
-                android:backgroundTint="#F31A0A"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/black"
                 android:src="@drawable/ic_remove"
-                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/amountTextView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 android:text="10"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/decreaseCartImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/increaseCartImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/round_image_background"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="14dp"
+                android:background="@drawable/circle"
                 android:backgroundTint="@color/black"
                 android:src="@drawable/ic_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/amountTextView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:tint="@color/white" />
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

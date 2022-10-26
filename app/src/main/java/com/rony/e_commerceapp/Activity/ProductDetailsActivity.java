@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
@@ -17,6 +18,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Adapter.RelatedProductAdapter;
 import com.rony.e_commerceapp.R;
+import com.rony.e_commerceapp.Response.AddCartBodyResponse;
+import com.rony.e_commerceapp.Response.AddCartResponse;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.CommonApiResponse;
 import com.rony.e_commerceapp.databinding.ActivityProductDetailsBinding;
@@ -34,7 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     ShimmerFrameLayout shimmerFrameLayout;
 
     ProductDetailsResponse productDetailsResponse;
-    String slug, category;
+    String slug, category, product_id;
 
     int count = 1;
 
@@ -52,6 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         slug = getIntent().getStringExtra("slug");
+        product_id = getIntent().getStringExtra("product_id");
 
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
@@ -63,6 +67,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToCart();
             }
         });
 
@@ -153,7 +164,28 @@ public class ProductDetailsActivity extends AppCompatActivity {
         relatedProductRecyclerView.setHasFixedSize(true);
         relatedProductRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+    }
+
+    private void addToCart(){
+
+        String quantity = binding.amountTextView.getText().toString().trim();
+
+        AddCartBodyResponse.Options options = new AddCartBodyResponse.Options("Large", "Long");
+        AddCartBodyResponse model = new AddCartBodyResponse(Integer.parseInt(quantity), options);
 
 
+        RetrofitClient.getRetrofitClient(this).addToCart(product_id, model).enqueue(new Callback<AddCartResponse>() {
+            @Override
+            public void onResponse(Call<AddCartResponse> call, Response<AddCartResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(ProductDetailsActivity.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddCartResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
@@ -26,15 +29,34 @@ public class CartActivity extends AppCompatActivity {
 
     ActivityCartBinding binding;
     RecyclerView cartRecyclerView;
-    List<CartResponse> cartResponseList;
+    CartResponse cartResponse;
     CartAdapter cartAdapter;
     List<DeliveryMethodResponse> deliveryMethodResponseList;
+
+    ArrayList<String> deliverAddressList;
+    ArrayList<String> deliverIdList;
+    ArrayList<String> deliverChargeList;
+    ArrayAdapter<String> deliverChargeAdapter;
+
+    String selectedDeliveryChargeId = null;
+    public static String deliveryChargeRate = null;
+    String deliveryChargeAddress = null;
+
+    double grand_total = 0, total_amount = 0;
+    double sum = 0;
+    double finalAmount = 0;
+
+    TextView cartSizeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        cartSizeTextView =findViewById(R.id.cartSizeTextView);
+
+        //binding.totalTextView.setText(String.valueOf(total_amount));
 
         binding.imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,44 +66,110 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        deliverAddressList = new ArrayList<>();
+        deliverChargeList = new ArrayList<>();
+        deliverIdList = new ArrayList<>();
+        deliverChargeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, deliverAddressList);
+        binding.deliveryChargeSpinner.setAdapter(deliverChargeAdapter);
 
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
         cartRecyclerView.setHasFixedSize(true);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cartResponseList= new ArrayList<>();
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Ekel Green Tea AHA BHA PHA Brightening Toner (250ml)", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "TRESemme Keratin Smooth Shampoo, 400ml", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-
-       /* cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));*/
-
-        /*cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));
-        cartResponseList.add(new CartResponse(R.drawable.fruits, "Fruits", "380", "1"));*/
-
-        cartAdapter = new CartAdapter(this, cartResponseList);
-        cartRecyclerView.setAdapter(cartAdapter);
+        //getCart();
 
         RetrofitClient.getRetrofitClient(this).getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
             @Override
             public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
                 if (response.isSuccessful()){
                     deliveryMethodResponseList = response.body();
-                    Toast.makeText(CartActivity.this, "Size is " + deliveryMethodResponseList.size(), Toast.LENGTH_SHORT).show();
+
+                    for (int i = 0; i < deliveryMethodResponseList.size(); i ++){
+                        deliverAddressList.add(deliveryMethodResponseList.get(i).name);
+                        deliverIdList.add(deliveryMethodResponseList.get(i).id);
+                        deliverChargeList.add(deliveryMethodResponseList.get(i).rate);
+                    }
+
+                    setDeliveryAdapter(deliverAddressList, deliverIdList, deliverChargeList);
+
                 }
             }
 
             @Override
             public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
                 Toast.makeText(CartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
     }
+
+    private void setDeliveryAdapter(ArrayList<String> deliverAddressList, ArrayList<String> deliverIdList, ArrayList<String> deliverChargeList) {
+        deliverChargeAdapter = new ArrayAdapter<>(CartActivity.this, android.R.layout.simple_spinner_dropdown_item, deliverAddressList);
+        binding.deliveryChargeSpinner.setAdapter(deliverChargeAdapter);
+
+        binding.deliveryChargeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selectedDeliveryChargeId = deliverIdList.get(i);
+                deliveryChargeRate = deliverChargeList.get(i);
+                deliveryChargeAddress = deliverAddressList.get(i);
+
+                grand_total = Double.parseDouble(deliveryChargeRate) + total_amount;
+                binding.grandTotalTextView.setText(String.valueOf(grand_total));
+
+                Toast.makeText(CartActivity.this, "Delivery Charge " + deliveryChargeAddress + " " +  deliveryChargeRate + " Tk", Toast.LENGTH_LONG).show();
+
+                getCart(deliveryChargeRate);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    private void getCart(String deliveryChargeRate){
+        RetrofitClient.getRetrofitClient(this).getCartItem().enqueue(new Callback<CartResponse>() {
+            @Override
+            public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
+
+                finalAmount = 0;
+                sum = 0;
+
+                if (response.isSuccessful()){
+
+
+                    cartResponse = response.body();
+
+                    cartSizeTextView.setText(String.valueOf(cartResponse.data.size()));
+                    cartAdapter = new CartAdapter(getApplicationContext(), cartResponse);
+                    cartRecyclerView.setAdapter(cartAdapter);
+
+                    for (int i = 0; i < cartResponse.data.size(); i ++){
+                        sum = sum + cartResponse.data.get(i).total;
+                    }
+
+                    System.out.println("Total is : " + sum);
+                    binding.totalTextView.setText(String.valueOf(sum));
+
+                    System.out.println("Delivery Charge is : " + deliveryChargeRate);
+
+                    finalAmount = Double.parseDouble(deliveryChargeRate) + sum;
+                    binding.grandTotalTextView.setText(String.valueOf(finalAmount));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartResponse> call, Throwable t) {
+                Toast.makeText(CartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

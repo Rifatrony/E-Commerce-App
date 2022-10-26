@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.rony.e_commerceapp.Activity.CategoryWiseProductActivity;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.CategoryResponse;

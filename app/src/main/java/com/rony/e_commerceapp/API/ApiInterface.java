@@ -1,5 +1,8 @@
 package com.rony.e_commerceapp.API;
 
+import com.rony.e_commerceapp.Response.AddCartBodyResponse;
+import com.rony.e_commerceapp.Response.AddCartResponse;
+import com.rony.e_commerceapp.Response.CartResponse;
 import com.rony.e_commerceapp.Response.CategoryResponse;
 import com.rony.e_commerceapp.Response.DeliveryMethodResponse;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
@@ -12,6 +15,7 @@ import com.rony.e_commerceapp.Response.UserRegisterResponse;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -98,5 +102,14 @@ public interface ApiInterface {
 
     @GET("user/dashboard")
     Call<UserDetailsResponse> getUserDetails();
+
+    @GET("carts")
+    Call<CartResponse> getCartItem();
+
+    @POST("carts/add/{path}")
+    Call<AddCartResponse> addToCart(
+            @Path("path") String product_id,
+            @Body AddCartBodyResponse addCartBodyResponse
+    );
 
 }

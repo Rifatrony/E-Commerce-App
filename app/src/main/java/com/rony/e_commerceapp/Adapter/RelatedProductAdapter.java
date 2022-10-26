@@ -52,6 +52,7 @@ public class RelatedProductAdapter extends RecyclerView.Adapter<RelatedProductAd
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("slug", commonApiResponse.products.data.get(position).slug);
+                    intent.putExtra("product_id", commonApiResponse.products.data.get(position).id);
                     context.startActivity(intent);
                 }
             });

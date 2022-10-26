@@ -1,46 +1,30 @@
 package com.rony.e_commerceapp.Response;
 
+import java.util.ArrayList;
+
 public class CartResponse {
 
-    int image;
-    String name, price, amount;
+    public ArrayList<Datum> data;
 
-    public CartResponse(int image, String name, String price, String amount) {
-        this.image = image;
-        this.name = name;
-        this.price = price;
-        this.amount = amount;
+    public CartResponse(ArrayList<Datum> data) {
+        this.data = data;
     }
 
-    public int getImage() {
-        return image;
+    public class Datum{
+        public String quantity;
+        public String price;
+        public double total;
+        public Product product;
     }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public class Product{
+        public String id;
+        public String name;
+        public String slug;
+        public String thumbnail;
+        public String discount;
+        public String price;
+        public double discounted_price;
+        public boolean has_attribute;
     }
 }
