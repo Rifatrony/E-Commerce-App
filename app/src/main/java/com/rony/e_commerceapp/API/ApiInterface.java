@@ -9,6 +9,7 @@ import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.CommonApiResponse;
+import com.rony.e_commerceapp.Response.SuccessResponse;
 import com.rony.e_commerceapp.Response.UserDetailsResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -111,5 +113,23 @@ public interface ApiInterface {
             @Path("path") String product_id,
             @Body AddCartBodyResponse addCartBodyResponse
     );
+
+    @DELETE("carts/{path}/delete")
+    Call<SuccessResponse> deleteAItem(
+            @Path("path") String product_id
+    );
+
+    @GET("carts/{path}/increment")
+    Call<CartResponse> incrementCart(
+            @Path("path") String product_id
+    );
+
+
+    @GET("carts/{path}/decrement")
+    Call<CartResponse> decrementCart(
+            @Path("path") String product_id
+    );
+
+
 
 }

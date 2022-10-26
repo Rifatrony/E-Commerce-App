@@ -147,7 +147,7 @@ public class CartActivity extends AppCompatActivity {
                     cartResponse = response.body();
 
                     cartSizeTextView.setText(String.valueOf(cartResponse.data.size()));
-                    cartAdapter = new CartAdapter(getApplicationContext(), cartResponse);
+                    cartAdapter = new CartAdapter(getApplicationContext(), cartResponse, binding.totalTextView);
                     cartRecyclerView.setAdapter(cartAdapter);
 
                     for (int i = 0; i < cartResponse.data.size(); i ++){
@@ -162,6 +162,8 @@ public class CartActivity extends AppCompatActivity {
                     finalAmount = Double.parseDouble(deliveryChargeRate) + sum;
                     binding.grandTotalTextView.setText(String.valueOf(finalAmount));
 
+                    cartAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -171,5 +173,16 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+    }*/
+
+    /*@Override
+    protected void onStop() {
+        super.onStop();
+        cartAdapter.
+    }*/
 
 }
