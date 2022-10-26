@@ -51,7 +51,7 @@
         android:layout_marginTop="16dp"
         android:cursorVisible="true"
         android:inputType="number"
-        android:itemBackground="#FAC16D"
+        android:itemBackground="@color/cart_bottom_color"
         android:padding="10dp"
         android:textColor="@color/text_color"
         android:textSize="18sp"

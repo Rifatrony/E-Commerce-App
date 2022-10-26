@@ -68,6 +68,11 @@ public interface ApiInterface {
     );
 
     @GET("product/products")
+    Call<CommonApiResponse> getAllProduct(
+            @Query("page") int page
+    );
+
+    @GET("product/products")
     Call<CommonApiResponse> getCategoryWiseProduct(
             @Query("category") String category,
             @Query("page") int page

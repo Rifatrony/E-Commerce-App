@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.Activity.AllProductActivity;
 import com.rony.e_commerceapp.Activity.CategoryActivity;
 import com.rony.e_commerceapp.Adapter.CategoryAdapter;
 import com.rony.e_commerceapp.Adapter.SliderAdapter;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment {
     CommonApiResponse commonApiResponse;
     TopSellingAdapter topSellingAdapter;
 
-    TextView seeAllCategoryTextView;
+    TextView seeAllCategoryTextView, topSellingSeeAllTextView;
 
 
     @Override
@@ -52,11 +53,19 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         seeAllCategoryTextView = view.findViewById(R.id.seeAllCategoryTextView);
+        topSellingSeeAllTextView = view.findViewById(R.id.topSellingSeeAllTextView);
 
         seeAllCategoryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), CategoryActivity.class));
+            }
+        });
+
+        topSellingSeeAllTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AllProductActivity.class));
             }
         });
 
