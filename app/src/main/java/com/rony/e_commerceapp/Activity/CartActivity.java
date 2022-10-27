@@ -1,13 +1,17 @@
 package com.rony.e_commerceapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +20,9 @@ import com.rony.e_commerceapp.Adapter.CartAdapter;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.CartResponse;
 import com.rony.e_commerceapp.Response.DeliveryMethodResponse;
+import com.rony.e_commerceapp.Response.SuccessResponse;
+import com.rony.e_commerceapp.Response.UserDetailsResponse;
+import com.rony.e_commerceapp.Response.UserResponse;
 import com.rony.e_commerceapp.databinding.ActivityCartBinding;
 
 import java.util.ArrayList;
@@ -48,6 +55,14 @@ public class CartActivity extends AppCompatActivity {
 
     TextView cartSizeTextView;
 
+    Dialog dialog;
+
+    EditText nameEditText, emailEditText, numberEditText, addressEditText;
+    AppCompatButton placeOrderButton;
+
+    public String name, email, number, address;
+    UserDetailsResponse userDetailsResponse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +79,16 @@ public class CartActivity extends AppCompatActivity {
                 onBackPressed();
                 finish();
             }
+        });
+
+        binding.checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+
+
         });
 
         deliverAddressList = new ArrayList<>();
@@ -104,6 +129,35 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+    private void takeUserDetails() {
+
+
+        RetrofitClient.getRetrofitClient(CartActivity.this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
+            @Override
+            public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
+                if (response.isSuccessful()){
+                    try {
+                        userDetailsResponse = response.body();
+                        assert userDetailsResponse != null;
+                        nameEditText.setText(userDetailsResponse.user.name);
+                        emailEditText.setText(userDetailsResponse.user.email);
+                        numberEditText.setText(userDetailsResponse.user.phone);
+                        addressEditText.setText(userDetailsResponse.user.address);
+                    }catch (Exception e){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
     private void setDeliveryAdapter(ArrayList<String> deliverAddressList, ArrayList<String> deliverIdList, ArrayList<String> deliverChargeList) {
         deliverChargeAdapter = new ArrayAdapter<>(CartActivity.this, android.R.layout.simple_spinner_dropdown_item, deliverAddressList);
         binding.deliveryChargeSpinner.setAdapter(deliverChargeAdapter);
@@ -123,6 +177,45 @@ public class CartActivity extends AppCompatActivity {
 
                 getCart(deliveryChargeRate);
 
+
+
+                binding.checkoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(CartActivity.this,selectedDeliveryChargeId , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "Checkout", Toast.LENGTH_SHORT).show();
+
+                        dialog = new Dialog(CartActivity.this);
+                        dialog.setContentView(R.layout.user_details_layout);
+                        nameEditText = dialog.findViewById(R.id.nameEditText);
+                        emailEditText = dialog.findViewById(R.id.emailEditText);
+                        numberEditText = dialog.findViewById(R.id.numberEditText);
+                        addressEditText = dialog.findViewById(R.id.addressEditText);
+                        placeOrderButton = dialog.findViewById(R.id.placeOrderButton);
+
+                        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                name = nameEditText.getText().toString().trim();
+                                email = emailEditText.getText().toString().trim();
+                                number = numberEditText.getText().toString().trim();
+                                address = addressEditText.getText().toString().trim();
+
+                                System.out.println(name + email + number + address);
+
+                                proceedOrder(name, email, number, address, selectedDeliveryChargeId);
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        dialog.show();
+
+                        takeUserDetails();
+
+                    }
+                });
+
             }
 
             @Override
@@ -133,8 +226,40 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+    private void proceedOrder(String name, String email, String number, String address, String selectedDeliveryChargeId) {
+
+        String userName, userEmail, userPhone, userAddress, id;
+
+        userName = name;
+        userEmail = email;
+        userPhone = number;
+        userAddress = address;
+        id = selectedDeliveryChargeId;
+
+        System.out.println("here " + userName + userEmail + userPhone + userAddress + id);
+
+        RetrofitClient.getRetrofitClient(this).placeOrder(userName, userEmail, userPhone, id, userAddress).enqueue(new Callback<SuccessResponse>() {
+            @Override
+            public void onResponse(Call<SuccessResponse> call, Response<SuccessResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(CartActivity.this, "Order Successful", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResponse> call, Throwable t) {
+                Toast.makeText(CartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
     private void getCart(String deliveryChargeRate){
+
         RetrofitClient.getRetrofitClient(this).getCartItem().enqueue(new Callback<CartResponse>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<CartResponse> call, Response<CartResponse> response) {
 
@@ -174,15 +299,17 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+
     /*@Override
     protected void onStart() {
         super.onStart();
     }*/
 
-    /*@Override
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
     protected void onStop() {
         super.onStop();
-        cartAdapter.
-    }*/
+        cartAdapter.notifyDataSetChanged();
+    }
 
 }

@@ -12,6 +12,7 @@ import com.rony.e_commerceapp.Response.CommonApiResponse;
 import com.rony.e_commerceapp.Response.SuccessResponse;
 import com.rony.e_commerceapp.Response.UserDetailsResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
+import com.rony.e_commerceapp.Response.UserResponse;
 
 import java.util.List;
 
@@ -128,6 +129,16 @@ public interface ApiInterface {
     @GET("carts/{path}/decrement")
     Call<CartResponse> decrementCart(
             @Path("path") String product_id
+    );
+
+    @FormUrlEncoded
+    @POST("checkout/process")
+    Call<SuccessResponse> placeOrder(
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("phone") String phone,
+            @Field("delivery_method") String delivery_method,
+            @Field("address") String address
     );
 
 
