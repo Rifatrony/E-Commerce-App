@@ -5,6 +5,8 @@ import com.rony.e_commerceapp.Response.AddCartResponse;
 import com.rony.e_commerceapp.Response.CartResponse;
 import com.rony.e_commerceapp.Response.CategoryResponse;
 import com.rony.e_commerceapp.Response.DeliveryMethodResponse;
+import com.rony.e_commerceapp.Response.OrderDetailsResponse;
+import com.rony.e_commerceapp.Response.OrderResponse;
 import com.rony.e_commerceapp.Response.ProductDetailsResponse;
 import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
@@ -141,6 +143,13 @@ public interface ApiInterface {
             @Field("address") String address
     );
 
+    @GET("user/orders")
+    Call<OrderResponse> getOrder();
+
+    @GET("user/order/details/{order_id}")
+    Call<OrderDetailsResponse> getOrderDetails(
+            @Path("order_id") String order_id
+    );
 
 
 }

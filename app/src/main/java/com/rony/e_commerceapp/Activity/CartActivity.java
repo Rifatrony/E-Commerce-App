@@ -182,8 +182,6 @@ public class CartActivity extends AppCompatActivity {
                 binding.checkoutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(CartActivity.this,selectedDeliveryChargeId , Toast.LENGTH_SHORT).show();
-                        Toast.makeText(CartActivity.this, "Checkout", Toast.LENGTH_SHORT).show();
 
                         dialog = new Dialog(CartActivity.this);
                         dialog.setContentView(R.layout.user_details_layout);
@@ -236,7 +234,6 @@ public class CartActivity extends AppCompatActivity {
         userAddress = address;
         id = selectedDeliveryChargeId;
 
-        System.out.println("here " + userName + userEmail + userPhone + userAddress + id);
 
         RetrofitClient.getRetrofitClient(this).placeOrder(userName, userEmail, userPhone, id, userAddress).enqueue(new Callback<SuccessResponse>() {
             @Override

@@ -20,8 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.rony.e_commerceapp.API.RetrofitClient;
-import com.rony.e_commerceapp.Adapter.CartAdapter;
-import com.rony.e_commerceapp.Fragment.FavouriteFragment;
+import com.rony.e_commerceapp.Fragment.OrderFragment;
 import com.rony.e_commerceapp.Fragment.HomeFragment;
 import com.rony.e_commerceapp.Fragment.ProfileFragment;
 import com.rony.e_commerceapp.R;
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_categories:
-                        startActivity(new Intent(getApplicationContext(), OtpActivity.class)
+                        startActivity(new Intent(getApplicationContext(), CategoryActivity.class)
                         );
                         break;
 
@@ -137,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new HomeFragment());
                         break;
 
-                    case R.id.favorite:
-                        replaceFragment(new FavouriteFragment());
+                    case R.id.order:
+                        replaceFragment(new OrderFragment());
                         break;
 
                     case R.id.profile:
@@ -154,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        binding.bottomNavigationView.setItemIconTintList(null);
 
         binding.cartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
