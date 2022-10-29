@@ -47,15 +47,11 @@ public class OrderFragment extends Fragment {
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.isSuccessful()){
                     orderResponse = response.body();
+                    assert orderResponse != null;
                     if (orderResponse.data.size()>0){
                         binding.actionBarLayout.setVisibility(View.VISIBLE);
                         orderAdapter = new OrderAdapter(getContext(), orderResponse);
                         binding.orderRecyclerView.setAdapter(orderAdapter);
-                    }
-
-
-                    if (orderResponse.data.size()<0){
-                        binding.noOrderFoundTextView.setVisibility(View.VISIBLE);
                     }
                 }
             }

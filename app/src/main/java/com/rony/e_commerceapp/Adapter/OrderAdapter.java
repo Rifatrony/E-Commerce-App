@@ -43,6 +43,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("order_id", orderResponse.data.get(position).id);
                     context.startActivity(intent);
                 }

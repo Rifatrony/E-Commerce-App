@@ -8,10 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#F3F0F0</color>
 
-    <color name="background">#E9F5FA</color>
+    <color name="background">#02405A</color>
     <color name="green_text_color">#1E8122</color>
 
-    <color name="edit_text_background">#D17D01</color>
+    <color name="edit_text_background">#FAD49C</color>
     <color name="secondary_edit_text_background">#E8FBE9</color>
     <color name="primary_text_color">#000</color>
     <color name="text_color">#fff</color>

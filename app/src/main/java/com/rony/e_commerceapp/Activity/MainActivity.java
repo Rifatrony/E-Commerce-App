@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 replaceFragment(new HomeFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.home);
             }
         });
 
@@ -134,15 +135,15 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setItemIconTintList(null);
 
+        binding.bottomNavigationView.setSelectedItemId(R.id.home);
+
+
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
 
-                    case R.id.test:
-                        replaceFragment(new HomeFragment());
-                        break;
+                switch (item.getItemId()){
 
                     case R.id.home:
                         replaceFragment(new HomeFragment());
@@ -180,9 +181,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
                 if (response.isSuccessful()){
                     userDetailsResponse = response.body();
-                    System.out.println(userDetailsResponse.user.name);
-                    System.out.println(userDetailsResponse.user.address);
-                    System.out.println(userDetailsResponse.user.email);
 
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     View headerView = navigationView.getHeaderView(0);
@@ -197,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                         navUserNumber.setText(userDetailsResponse.user.phone);
                     }
                     catch (Exception e){
-
+                        System.out.println(e.getMessage());
                     }
                 }
             }

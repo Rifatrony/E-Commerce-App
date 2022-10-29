@@ -31,7 +31,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/primary_edittext_background"
-                android:backgroundTint="#D0FDD2"
+                android:backgroundTint="@color/cart_bottom_color"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="5dp"
                 android:elevation="0.3dp"
