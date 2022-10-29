@@ -91,7 +91,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void SignUpNewUser() {
-        showToast("Clicked");
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.signUpButton.setVisibility(View.GONE);
         RetrofitClient.getRetrofitClient(this).sendUserData(name,email, number, password, confirm_password, "", "").enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
@@ -108,12 +109,16 @@ public class SignUpActivity extends AppCompatActivity {
                     intent.putExtra("device_name", "redmi");
                     startActivity(intent);
                     finish();
+
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.signUpButton.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-
+                binding.progressBar.setVisibility(View.GONE);
+                binding.signUpButton.setVisibility(View.VISIBLE);
             }
         });
     }

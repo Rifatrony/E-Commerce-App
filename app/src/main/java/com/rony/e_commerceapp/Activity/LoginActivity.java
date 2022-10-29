@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                finish();
             }
         });
 
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = binding.passwordEditText.getText().toString().trim();
 
         if (loginNumber.isEmpty()) {
-            showToast("Enter Number");
+            showToast("Number Required");
             return;
         }
         else if (loginPassword.isEmpty()) {
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Login() {
 
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.loginButton.setVisibility(View.GONE);
+
         RetrofitClientWithoutHeader.getRetrofitClient().userLogin(loginNumber, loginPassword, "redmi").enqueue(new Callback<UserRegisterResponse>() {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
@@ -82,6 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                     /*signInButton.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);*/
                     showToast("Login Successfully");
+
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.loginButton.setVisibility(View.VISIBLE);
+
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginNumber, loginPassword);
                     sessionManagement.setLoginSession(dataModel);
@@ -92,13 +100,16 @@ public class LoginActivity extends AppCompatActivity {
                     /*signInButton.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);*/
                     showToast("Error "+response.errorBody().toString());
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.loginButton.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
                 showToast("Failure .........."+t.getLocalizedMessage());
-
+                binding.progressBar.setVisibility(View.GONE);
+                binding.loginButton.setVisibility(View.VISIBLE);
                 /*signInButton.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);*/
             }

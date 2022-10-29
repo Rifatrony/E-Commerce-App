@@ -173,7 +173,7 @@ public class CartActivity extends AppCompatActivity {
                 grand_total = Double.parseDouble(deliveryChargeRate) + total_amount;
                 binding.grandTotalTextView.setText(String.valueOf(grand_total));
 
-                Toast.makeText(CartActivity.this, "Delivery Charge " + deliveryChargeAddress + " " +  deliveryChargeRate + " Tk", Toast.LENGTH_LONG).show();
+                Toast.makeText(CartActivity.this, "Delivery Charge " + deliveryChargeAddress + " " +  deliveryChargeRate + " Tk", Toast.LENGTH_SHORT).show();
 
                 getCart(deliveryChargeRate);
 

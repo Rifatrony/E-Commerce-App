@@ -11,7 +11,7 @@
     <color name="background">#E9F5FA</color>
     <color name="green_text_color">#1E8122</color>
 
-    <color name="edit_text_background">#FDD08C</color>
+    <color name="edit_text_background">#D17D01</color>
     <color name="secondary_edit_text_background">#E8FBE9</color>
     <color name="primary_text_color">#000</color>
     <color name="text_color">#fff</color>
@@ -26,7 +26,7 @@
     <color name="random_color3">#3C7C3F</color>
     <color name="random_color4">#5A65AA</color>
     <color name="random_color5">#275970</color>
-    <color name="random_color6">#8C6E41</color>
+    <color name="random_color6">#D17D01</color>
     <color name="random_color7">#9E4326</color>
     <color name="random_color8">#379F96</color>
     <color name="random_color9">#9C4B45</color>

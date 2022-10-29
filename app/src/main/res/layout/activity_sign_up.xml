@@ -30,8 +30,11 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/primary_edittext_background"
+        android:background="@drawable/secondary_edittext_background"
         android:hint="Name"
+        android:inputType="textAutoCorrect"
+        android:drawableStart="@drawable/ic_outline_person_24"
+        android:drawablePadding="5dp"
         android:padding="12dp"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,11 +46,13 @@
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/primary_edittext_background"
+        android:background="@drawable/secondary_edittext_background"
         android:hint="Email"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="5dp"
         android:padding="12dp"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +67,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/primary_edittext_background"
+        android:background="@drawable/secondary_edittext_background"
         android:hint="Number"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="5dp"
         android:inputType="number"
         android:padding="12dp"
         android:textSize="13sp"
@@ -79,8 +86,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/primary_edittext_background"
+        android:background="@drawable/secondary_edittext_background"
         android:hint="Password"
+        android:drawableStart="@drawable/ic_outline_lock_24"
+        android:drawablePadding="5dp"
         android:inputType="textPassword"
         android:padding="12dp"
         android:textSize="13sp"
@@ -97,29 +106,54 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:inputType="textPassword"
-        android:background="@drawable/primary_edittext_background"
+        android:background="@drawable/secondary_edittext_background"
         android:hint="Confirm Password"
+        android:drawableStart="@drawable/ic_outline_lock_24"
+        android:drawablePadding="5dp"
         android:padding="12dp"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signUpButton"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/primary_button_background"
-        android:text="Signup"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/primary_button_background"
+            android:backgroundTint="@color/random_color6"
+            android:text="Signup"
+            android:elevation="0dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+
+    </FrameLayout>
+
 
 
     <TextView
@@ -138,6 +172,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

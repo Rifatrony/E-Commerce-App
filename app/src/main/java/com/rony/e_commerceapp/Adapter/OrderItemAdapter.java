@@ -14,8 +14,7 @@ import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.OrderDetailsResponse;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemViewHolder> {
-
-
+    
     Context context;
     OrderDetailsResponse orderDetailsResponse;
 

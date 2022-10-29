@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         binding.menuImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.END);
+                drawerLayout.openDrawer(GravityCompat.START);
 
             }
         });
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 int id = item.getItemId();
-                drawerLayout.closeDrawer(GravityCompat.END);
+                drawerLayout.closeDrawer(GravityCompat.START);
 
 
                 switch (id){
                     case R.id.nav_profile:
-                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
 
                     case R.id.nav_categories:
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_order:
-                        Toast.makeText(MainActivity.this, "OrderActivity", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), OrderActivity.class));
                         break;
 
                     case R.id.nav_logout:
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.menu:
-                        drawerLayout.openDrawer(GravityCompat.END);
+                        //drawerLayout.openDrawer(GravityCompat.START);
                         break;
 
                 }
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             binding.bottomNavigationView.setSelectedItemId(R.id.home);
-            drawerLayout.closeDrawer(GravityCompat.END);
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 
