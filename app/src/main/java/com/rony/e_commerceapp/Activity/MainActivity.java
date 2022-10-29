@@ -72,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new HomeFragment());
+            }
+        });
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -132,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+
+                    case R.id.test:
+                        replaceFragment(new HomeFragment());
+                        break;
+
                     case R.id.home:
                         replaceFragment(new HomeFragment());
                         break;

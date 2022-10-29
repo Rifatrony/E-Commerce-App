@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Activity.OrderActivity">
+
+
+    <include layout="@layout/demo_design_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
