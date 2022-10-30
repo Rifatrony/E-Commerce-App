@@ -121,6 +121,18 @@
                             app:layout_constraintStart_toStartOf="@+id/emailTextView"
                             app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
+                        <TextView
+                            android:id="@+id/addressTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:visibility="gone"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/numberTextView"
+                            app:layout_constraintTop_toBottomOf="@+id/numberTextView" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,7 +180,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
-                        android:src="@drawable/ic_outline_person_24"
+                        android:src="@drawable/user"
                         app:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -233,7 +245,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/orderHistoryCardView"
+                android:id="@+id/changePasswordCardView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -252,6 +264,97 @@
                     >
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="12dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/round_image_background"
+                        android:backgroundTint="@color/random_color3"
+                        android:src="@drawable/password"
+                        app:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/forwardImage"
+                        app:layout_constraintStart_toEndOf="@+id/circleImage"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/changePassword"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:text="Change Password"
+                            android:paddingStart="16sp"
+                            android:paddingEnd="16dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/password"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:text="Here you can change your password"
+                            android:paddingStart="16sp"
+                            android:paddingEnd="16dp"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/changePassword"
+                            app:layout_constraintTop_toBottomOf="@+id/changePassword" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView
+                        android:id="@+id/forwardImage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/arrow_forward"
+                        android:layout_marginEnd="10dp"
+                        android:padding="4dp"
+                        app:tint="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/orderHistoryCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/changePasswordCardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/orderHistoryImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -259,7 +362,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
-                        android:src="@drawable/history"
+                        android:src="@drawable/check_list"
                         app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +468,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
-                        android:src="@drawable/history"
+                        android:src="@drawable/privacy"
                         app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -388,11 +491,11 @@
 
                     <ImageView
                         android:id="@+id/forwardImageView2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
-                        android:padding="4dp"
+                        android:padding="2dp"
                         app:tint="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -430,7 +533,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
-                        android:src="@drawable/history"
+                        android:src="@drawable/product_return"
                         app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -453,11 +556,11 @@
 
                     <ImageView
                         android:id="@+id/forwardImageView3"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
-                        android:padding="4dp"
+                        android:padding="2dp"
                         app:tint="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -495,7 +598,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
-                        android:src="@drawable/history"
+                        android:src="@drawable/terms_and_conditions"
                         app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -505,7 +608,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_color"
-                        android:text="Return Policy"
+                        android:text="Terms"
                         android:paddingStart="16sp"
                         android:paddingEnd="16dp"
                         android:textSize="14sp"
@@ -518,11 +621,11 @@
 
                     <ImageView
                         android:id="@+id/forwardImageView4"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
-                        android:padding="4dp"
+                        android:padding="2dp"
                         app:tint="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -176,6 +176,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fetchUserDetails();
+
+        countCartItem();
+
+    }
+
+    private void fetchUserDetails() {
         RetrofitClient.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
             @Override
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
@@ -205,9 +212,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        countCartItem();
-
     }
 
     private void Logout() {
@@ -250,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CartResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Here "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

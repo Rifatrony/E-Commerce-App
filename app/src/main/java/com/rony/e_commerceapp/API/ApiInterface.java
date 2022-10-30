@@ -12,6 +12,7 @@ import com.rony.e_commerceapp.Response.RegistrationResponse;
 import com.rony.e_commerceapp.Response.SliderResponse;
 import com.rony.e_commerceapp.Response.CommonApiResponse;
 import com.rony.e_commerceapp.Response.SuccessResponse;
+import com.rony.e_commerceapp.Response.TokenInvokedResponse;
 import com.rony.e_commerceapp.Response.UserDetailsResponse;
 import com.rony.e_commerceapp.Response.UserRegisterResponse;
 import com.rony.e_commerceapp.Response.UserResponse;
@@ -62,6 +63,24 @@ public interface ApiInterface {
             @Field("phone") String phone,
             @Field("password") String password,
             @Field("device_name") String device_name
+    );
+
+    @FormUrlEncoded
+    @POST("user/profile/update")
+    Call<SuccessResponse> updateProfile(
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("phone") String phone,
+            @Field("address") String address
+
+    );
+
+    @FormUrlEncoded
+    @POST("user/reset/password")
+    Call<TokenInvokedResponse> changePassword(
+            @Field("currentpassword") String currentpassword,
+            @Field("password") String password,
+            @Field("password_confirmation") String password_confirmation
     );
 
     @GET("category/index")
