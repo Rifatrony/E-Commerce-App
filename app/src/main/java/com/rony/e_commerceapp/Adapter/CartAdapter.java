@@ -142,6 +142,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onClick(View view) {
                 RetrofitClient.getRetrofitClient(context).deleteAItem(cartResponse.data.get(position).product.id).enqueue(new Callback<SuccessResponse>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(Call<SuccessResponse> call, Response<SuccessResponse> response) {
                         if (response.isSuccessful()){
@@ -158,19 +159,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 });
             }
         });
-
-        /*holder.increaseCartImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                amount = cartResponseList.get(position).getAmount();
-                count = Integer.parseInt(amount);
-                count++;
-                System.out.println("Count is + " + count);
-                notifyDataSetChanged();
-                //updatePrice();
-            }
-        });*/
-
     }
 
     @Override
@@ -207,6 +195,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cartResponse.data.get(i).setTotal(sum);
         }
         totalTextView.setText(String.valueOf(sum));
+        System.out.println(String.valueOf(sum));
     }
 
 }

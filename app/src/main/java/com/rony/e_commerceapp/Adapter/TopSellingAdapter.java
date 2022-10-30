@@ -42,9 +42,10 @@ public class TopSellingAdapter extends RecyclerView.Adapter<TopSellingAdapter.To
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull TopSellingViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
         if (commonApiResponse.products.data.size()>0){
             holder.nameTextView.setText(commonApiResponse.products.data.get(position).name);
-            holder.priceTextView.setText(commonApiResponse.products.data.get(position).price);
+            holder.priceTextView.setText(String.valueOf(commonApiResponse.products.data.get(position).discounted_price) + " ৳");
             holder.discountTextView.setText(commonApiResponse.products.data.get(position).discount + " %");
 
             Glide.with(context).load(commonApiResponse.products.data.get(position).thumbnail).into(holder.imageView);

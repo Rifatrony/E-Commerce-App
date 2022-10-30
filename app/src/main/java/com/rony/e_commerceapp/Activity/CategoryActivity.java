@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Adapter.AllCategoriesAdapter;
@@ -31,6 +32,13 @@ public class CategoryActivity extends AppCompatActivity {
 
         binding.allCategoriesRecyclerView.setHasFixedSize(true);
         binding.allCategoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+
+        binding.imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RetrofitClient.getRetrofitClient(this).getCategories().enqueue(new Callback<CategoryResponse>() {
             @SuppressLint("NotifyDataSetChanged")

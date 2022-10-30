@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.rony.e_commerceapp.API.RetrofitClient;
+import com.rony.e_commerceapp.Fragment.AllProductFragment;
+import com.rony.e_commerceapp.Fragment.CategoryFragment;
 import com.rony.e_commerceapp.Fragment.OrderFragment;
 import com.rony.e_commerceapp.Fragment.HomeFragment;
 import com.rony.e_commerceapp.Fragment.ProfileFragment;
@@ -145,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
 
+                    case R.id.category:
+                        replaceFragment(new CategoryFragment());
+                        break;
+
                     case R.id.home:
                         replaceFragment(new HomeFragment());
                         break;
@@ -157,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new ProfileFragment());
                         break;
 
-                    case R.id.menu:
+                    case R.id.all_product:
+                        replaceFragment(new AllProductFragment());
                         //drawerLayout.openDrawer(GravityCompat.START);
                         break;
 

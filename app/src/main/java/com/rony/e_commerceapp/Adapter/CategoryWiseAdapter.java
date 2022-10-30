@@ -44,7 +44,7 @@ public class CategoryWiseAdapter extends RecyclerView.Adapter<CategoryWiseAdapte
     public void onBindViewHolder(@NonNull CategoryWiseViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (commonApiResponse.products.data.size()>0){
             holder.nameTextView.setText(commonApiResponse.products.data.get(position).name);
-            holder.priceTextView.setText(commonApiResponse.products.data.get(position).price);
+            holder.priceTextView.setText(commonApiResponse.products.data.get(position).discounted_price + " ৳");
             holder.discountTextView.setText(commonApiResponse.products.data.get(position).discount + " %");
 
             Glide.with(context).load(commonApiResponse.products.data.get(position).thumbnail).into(holder.imageView);

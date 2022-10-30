@@ -40,7 +40,7 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.Al
     public void onBindViewHolder(@NonNull AllProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (commonApiResponse.products.data.size()>0){
             holder.nameTextView.setText(commonApiResponse.products.data.get(position).name);
-            holder.priceTextView.setText(String.valueOf(commonApiResponse.products.data.get(position).discounted_price));
+            holder.priceTextView.setText(String.valueOf(commonApiResponse.products.data.get(position).discounted_price) + " ৳");
             holder.discountTextView.setText(commonApiResponse.products.data.get(position).discount + " %");
 
             Glide.with(context).load(commonApiResponse.products.data.get(position).thumbnail).into(holder.imageView);

@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/test"
-        android:title="Test"
-        android:icon="@drawable/bag"/>
+        android:id="@+id/category"
+        android:title="Category"
+        android:icon="@drawable/category"/>
 
     <item
-        android:title="Order"
-        android:id="@+id/order"
-        android:icon="@drawable/order"/>
+        android:title="All product"
+        android:id="@+id/all_product"
+        android:icon="@drawable/features"/>
 
     <item android:id="@+id/home"
         android:title="Home"
         />
 
     <item
-        android:title="Menu"
-        android:id="@+id/menu"
-        android:icon="@drawable/menu"/>
+        android:title="Order"
+        android:id="@+id/order"
+        android:icon="@drawable/order_2"/>
 
     <item
         android:title="Profile"
         android:id="@+id/profile"
-        android:icon="@drawable/account"/>
+        android:icon="@drawable/user"/>
 
 
 </menu>

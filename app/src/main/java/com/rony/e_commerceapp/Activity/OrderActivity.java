@@ -28,6 +28,13 @@ public class OrderActivity extends AppCompatActivity {
         binding = ActivityOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         binding.orderRecyclerView.setHasFixedSize(true);
         binding.orderRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -38,7 +45,7 @@ public class OrderActivity extends AppCompatActivity {
                     orderResponse = response.body();
                     assert orderResponse != null;
                     if (orderResponse.data.size()>0){
-                        binding.actionBarLayout.setVisibility(View.VISIBLE);
+                        binding.constraintLayout.setVisibility(View.VISIBLE);
                         orderAdapter = new OrderAdapter(getApplicationContext(), orderResponse);
                         binding.orderRecyclerView.setAdapter(orderAdapter);
                     }
