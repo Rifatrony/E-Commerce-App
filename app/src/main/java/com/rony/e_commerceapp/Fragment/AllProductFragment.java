@@ -73,43 +73,47 @@ public class AllProductFragment extends Fragment {
             public void onResponse(Call<CommonApiResponse> call, Response<CommonApiResponse> response) {
                 if (response.isSuccessful()){
 
-                    binding.shimmerLayout.stopShimmer();
-                    binding.shimmerLayout.setVisibility(View.GONE);
-                    binding.nestedScrollView.setVisibility(View.VISIBLE);
-                    commonApiResponse = response.body();
+                    try {
+                        binding.shimmerLayout.stopShimmer();
+                        binding.shimmerLayout.setVisibility(View.GONE);
+                        binding.nestedScrollView.setVisibility(View.VISIBLE);
+                        commonApiResponse = response.body();
 
-                    binding.paginationLayout.setVisibility(View.VISIBLE);
+                        binding.paginationLayout.setVisibility(View.VISIBLE);
 
-                    System.out.println("current page is ----- >" + commonApiResponse.products.pagination.current_page);
+                        System.out.println("current page is ----- >" + commonApiResponse.products.pagination.current_page);
 
-                    binding.pageNumberTextView.setText(commonApiResponse.products.pagination.current_page
-                            + " of " + commonApiResponse.products.pagination.total_pages);
-                    System.out.println("Total page is : " + commonApiResponse.products.pagination.total_pages);
+                        binding.pageNumberTextView.setText(commonApiResponse.products.pagination.current_page
+                                + " of " + commonApiResponse.products.pagination.total_pages);
+                        System.out.println("Total page is : " + commonApiResponse.products.pagination.total_pages);
 
-                    if (commonApiResponse.products.pagination.current_page == page){
-                        allProductAdapter = new AllProductAdapter(getContext(), commonApiResponse);
-                        binding.allProductRecyclerView.setAdapter(allProductAdapter);
-                        allProductAdapter.notifyDataSetChanged();
-                        binding.previous.setEnabled(true);
-                        binding.previous.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    }
+                        if (commonApiResponse.products.pagination.current_page == page){
+                            allProductAdapter = new AllProductAdapter(getContext(), commonApiResponse);
+                            binding.allProductRecyclerView.setAdapter(allProductAdapter);
+                            allProductAdapter.notifyDataSetChanged();
+                            binding.previous.setEnabled(true);
+                            binding.previous.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                        }
 
-                    if (commonApiResponse.products.pagination.current_page == 1){
-                        System.out.println("This is the first page");
-                        binding.previous.setEnabled(false);
-                    }
+                        if (commonApiResponse.products.pagination.current_page == 1){
+                            System.out.println("This is the first page");
+                            binding.previous.setEnabled(false);
+                        }
 
-                    if (commonApiResponse.products.pagination.total_pages > 1){
-                        System.out.println(String.valueOf(page + 1) + " is the next page");
-                        allProductAdapter = new AllProductAdapter(getContext(), commonApiResponse);
-                        binding.allProductRecyclerView.setAdapter(allProductAdapter);
-                        allProductAdapter.notifyDataSetChanged();
-                        binding.next.setEnabled(true);
-                    }
+                        if (commonApiResponse.products.pagination.total_pages > 1){
+                            System.out.println(String.valueOf(page + 1) + " is the next page");
+                            allProductAdapter = new AllProductAdapter(getContext(), commonApiResponse);
+                            binding.allProductRecyclerView.setAdapter(allProductAdapter);
+                            allProductAdapter.notifyDataSetChanged();
+                            binding.next.setEnabled(true);
+                        }
 
-                    if (commonApiResponse.products.pagination.total_pages == commonApiResponse.products.pagination.current_page){
-                        System.out.println("This is the last page");
-                        binding.next.setEnabled(false);
+                        if (commonApiResponse.products.pagination.total_pages == commonApiResponse.products.pagination.current_page){
+                            System.out.println("This is the last page");
+                            binding.next.setEnabled(false);
+                        }
+                    }catch (Exception e){
+
                     }
 
                 }
