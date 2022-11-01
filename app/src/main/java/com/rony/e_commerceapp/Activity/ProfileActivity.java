@@ -47,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.shimmerFrameLayout.startShimmer();
+
         sessionManagement = new SessionManagement(this);
 
         setListener();
@@ -81,7 +83,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
                         if (response.isSuccessful()){
+
+                            binding.shimmerFrameLayout.stopShimmer();
+                            binding.shimmerFrameLayout.setVisibility(View.GONE);
+                            binding.scrollView.setVisibility(View.VISIBLE);
+
+
                             userDetailsResponse = response.body();
+                            assert userDetailsResponse != null;
                             name = userDetailsResponse.user.name;
                             email = userDetailsResponse.user.email;
                             number = userDetailsResponse.user.phone;

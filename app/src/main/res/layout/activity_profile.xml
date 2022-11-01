@@ -39,9 +39,29 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionBarLayout">
+
+        <include layout="@layout/profile_shimmer"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/actionBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,27 +73,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/random_color3"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/random_color3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circleImageView6"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:padding="10dp"
                         android:layout_marginStart="10dp"
+                        android:padding="10dp"
                         android:src="@drawable/profile"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -126,9 +144,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textColor="@color/text_color"
-                            android:visibility="gone"
                             android:textSize="12sp"
                             android:textStyle="normal"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/numberTextView"
                             app:layout_constraintTop_toBottomOf="@+id/numberTextView" />
@@ -140,13 +158,13 @@
                         android:id="@+id/editImageView"
                         android:layout_width="?actionBarSize"
                         android:layout_height="?actionBarSize"
-                        android:src="@drawable/edit"
                         android:layout_marginEnd="10dp"
                         android:padding="10dp"
-                        app:tint="@color/random_color7"
+                        android:src="@drawable/edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/random_color7" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,9 +176,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileCardView">
@@ -169,22 +187,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circleImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/user"
-                        app:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout1"
@@ -199,10 +216,10 @@
                             android:id="@+id/name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="My Account"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="My Account"
+                            android:textColor="@color/text_color"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -213,16 +230,15 @@
                             android:id="@+id/details"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="Here you can update your profile"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="Here you can update your profile"
+                            android:textColor="@color/text_color"
                             android:textSize="12sp"
                             android:textStyle="normal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/name"
                             app:layout_constraintTop_toBottomOf="@+id/name" />
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -231,13 +247,13 @@
                         android:id="@+id/forwardImageView"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="4dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -249,9 +265,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/myAccountCardView">
@@ -260,22 +276,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circleImage"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/password"
-                        app:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout5"
@@ -290,10 +305,10 @@
                             android:id="@+id/changePassword"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="Change Password"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="Change Password"
+                            android:textColor="@color/text_color"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -304,16 +319,15 @@
                             android:id="@+id/password"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="Here you can change your password"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="Here you can change your password"
+                            android:textColor="@color/text_color"
                             android:textSize="12sp"
                             android:textStyle="normal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/changePassword"
                             app:layout_constraintTop_toBottomOf="@+id/changePassword" />
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -322,13 +336,13 @@
                         android:id="@+id/forwardImage"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="4dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -340,9 +354,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/changePasswordCardView">
@@ -351,22 +365,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/orderHistoryImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/check_list"
-                        app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#F60202" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout2"
@@ -381,10 +394,10 @@
                             android:id="@+id/orderHistory"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="Order History"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="Order History"
+                            android:textColor="@color/text_color"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -395,16 +408,15 @@
                             android:id="@+id/orderHistoryDetails"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_color"
-                            android:text="Take a look at your orders"
                             android:paddingStart="16sp"
                             android:paddingEnd="16dp"
+                            android:text="Take a look at your orders"
+                            android:textColor="@color/text_color"
                             android:textSize="12sp"
                             android:textStyle="normal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/orderHistory"
                             app:layout_constraintTop_toBottomOf="@+id/orderHistory" />
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -413,13 +425,13 @@
                         android:id="@+id/forwardImageView1"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="4dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -431,8 +443,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="More Setting"
                 android:padding="20dp"
+                android:text="More Setting"
                 android:textColor="@color/text_color"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -446,9 +458,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/moreSettingTextView">
@@ -457,30 +469,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/privacyPolicyImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/privacy"
-                        app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#F60202" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color"
-                        android:text="Privacy Policy"
                         android:paddingStart="16sp"
                         android:paddingEnd="16dp"
+                        android:text="Privacy Policy"
+                        android:textColor="@color/text_color"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -493,13 +504,13 @@
                         android:id="@+id/forwardImageView2"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="2dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -511,9 +522,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/privacyPolicyCardView">
@@ -522,30 +533,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/returnPolicyImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/product_return"
-                        app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#F60202" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color"
-                        android:text="Return Policy"
                         android:paddingStart="16sp"
                         android:paddingEnd="16dp"
+                        android:text="Return Policy"
+                        android:textColor="@color/text_color"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -558,13 +568,13 @@
                         android:id="@+id/forwardImageView3"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="2dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -576,9 +586,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/returnPolicyCardView">
@@ -587,30 +597,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/termsImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:padding="12dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/round_image_background"
                         android:backgroundTint="@color/random_color3"
+                        android:padding="12dp"
                         android:src="@drawable/terms_and_conditions"
-                        app:tint="#F60202"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#F60202" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color"
-                        android:text="Terms"
                         android:paddingStart="16sp"
                         android:paddingEnd="16dp"
+                        android:text="Terms"
+                        android:textColor="@color/text_color"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -623,13 +632,13 @@
                         android:id="@+id/forwardImageView4"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_forward"
                         android:layout_marginEnd="10dp"
                         android:padding="2dp"
-                        app:tint="@color/black"
+                        android:src="@drawable/arrow_forward"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
