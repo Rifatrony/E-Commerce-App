@@ -30,6 +30,8 @@ public class CategoryActivity extends AppCompatActivity {
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.shimmerLayout.startShimmer();
+
         binding.allCategoriesRecyclerView.setHasFixedSize(true);
         binding.allCategoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
@@ -45,6 +47,11 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()){
+
+                    binding.shimmerLayout.stopShimmer();
+                    binding.shimmerLayout.setVisibility(View.GONE);
+                    binding.allCategoriesRecyclerView.setVisibility(View.VISIBLE);
+
                     categoryResponse = response.body();
                     allCategoriesAdapter = new AllCategoriesAdapter(getApplicationContext(), categoryResponse);
                     binding.allCategoriesRecyclerView.setAdapter(allCategoriesAdapter);

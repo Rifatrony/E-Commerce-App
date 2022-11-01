@@ -53,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         setListener();
 
+
         binding.imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,9 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
                         if (response.isSuccessful()){
 
-                            binding.shimmerFrameLayout.stopShimmer();
-                            binding.shimmerFrameLayout.setVisibility(View.GONE);
-                            binding.scrollView.setVisibility(View.VISIBLE);
+
 
 
                             userDetailsResponse = response.body();
@@ -186,6 +185,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
                 if (response.isSuccessful()){
+
+                    binding.shimmerFrameLayout.stopShimmer();
+                    binding.shimmerFrameLayout.setVisibility(View.GONE);
+                    binding.scrollView.setVisibility(View.VISIBLE);
+
                     userDetailsResponse = response.body();
                     assert userDetailsResponse != null;
                     binding.nameTextView.setText(userDetailsResponse.user.name);

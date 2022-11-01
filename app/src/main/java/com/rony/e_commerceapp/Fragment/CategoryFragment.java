@@ -36,6 +36,8 @@ public class CategoryFragment extends Fragment {
         binding =  FragmentCategoryBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
+        binding.shimmerLayout.startShimmer();
+
         binding.allCategoriesRecyclerView.setHasFixedSize(true);
         binding.allCategoriesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
@@ -44,6 +46,11 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()){
+
+                    binding.shimmerLayout.stopShimmer();
+                    binding.shimmerLayout.setVisibility(View.GONE);
+                    binding.allCategoriesRecyclerView.setVisibility(View.VISIBLE);
+
                     categoryResponse = response.body();
                     allCategoriesAdapter = new AllCategoriesAdapter(getContext(), categoryResponse);
                     binding.allCategoriesRecyclerView.setAdapter(allCategoriesAdapter);
