@@ -9,7 +9,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +34,7 @@ import com.rony.e_commerceapp.Fragment.ProfileFragment;
 import com.rony.e_commerceapp.R;
 import com.rony.e_commerceapp.Response.CartResponse;
 import com.rony.e_commerceapp.Response.UserDetailsResponse;
+import com.rony.e_commerceapp.Services.NetworkMonitor;
 import com.rony.e_commerceapp.Session.SessionManagement;
 import com.rony.e_commerceapp.databinding.ActivityMainBinding;
 
@@ -48,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     UserDetailsResponse userDetailsResponse;
     SessionManagement sessionManagement;
 
+    BroadcastReceiver broadcastReceiver = null;
+    Dialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +71,20 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation_view);
         frameLayout = findViewById(R.id.frameLayout);
         cartSizeTextView = findViewById(R.id.cartSizeTextView);
+
+        dialog = new Dialog(MainActivity.this);
+
+        broadcastReceiver = new NetworkMonitor();
+        InternetStatus();
+
+        /*if (checkNetworkConnection()){
+            Toast.makeText(this, "Connected to the Network", Toast.LENGTH_SHORT).show();
+            //dialog.dismiss();
+        }
+        else {
+            *//*dialog.setContentView(R.layout.connection_layout);
+            dialog.show();*//*
+        }*/
 
         sessionManagement = new SessionManagement(this);
 
@@ -138,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
 
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
-
 
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
@@ -264,6 +287,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Here "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void InternetStatus(){
+        registerReceiver(broadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    public boolean checkNetworkConnection(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
     }
 
 }

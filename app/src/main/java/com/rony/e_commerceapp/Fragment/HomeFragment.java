@@ -1,5 +1,6 @@
 package com.rony.e_commerceapp.Fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.rony.e_commerceapp.API.RetrofitClient;
 import com.rony.e_commerceapp.Activity.AllProductActivity;
 import com.rony.e_commerceapp.Activity.CategoryActivity;
+import com.rony.e_commerceapp.Activity.SearchActivity;
 import com.rony.e_commerceapp.Adapter.CategoryAdapter;
 import com.rony.e_commerceapp.Adapter.SliderAdapter;
 import com.rony.e_commerceapp.Adapter.TopSellingAdapter;
@@ -44,7 +46,9 @@ public class HomeFragment extends Fragment {
     CommonApiResponse commonApiResponse;
     TopSellingAdapter topSellingAdapter;
 
-    TextView seeAllCategoryTextView, topSellingSeeAllTextView;
+    TextView searchEditText, seeAllCategoryTextView, topSellingSeeAllTextView;
+
+    BroadcastReceiver broadcastReceiver = null;
 
 
     @Override
@@ -54,11 +58,20 @@ public class HomeFragment extends Fragment {
 
         seeAllCategoryTextView = view.findViewById(R.id.seeAllCategoryTextView);
         topSellingSeeAllTextView = view.findViewById(R.id.topSellingSeeAllTextView);
+        searchEditText = view.findViewById(R.id.searchEditText);
+
 
         seeAllCategoryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), CategoryActivity.class));
+            }
+        });
+
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
             }
         });
 
