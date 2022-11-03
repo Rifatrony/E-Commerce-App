@@ -101,7 +101,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constrainLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="?actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
             >
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bottomAppBar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:backgroundTint="@color/cart_bottom_color"

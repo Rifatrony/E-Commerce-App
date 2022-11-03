@@ -299,10 +299,9 @@ public class MainActivity extends AppCompatActivity {
         return (networkInfo != null && networkInfo.isConnected());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    /*@Override
+    protected void onStop() {
+        super.onStop();
         unregisterReceiver(broadcastReceiver);
-    }
-
+    }*/
 }

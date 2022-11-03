@@ -170,5 +170,10 @@ public interface ApiInterface {
             @Path("order_id") String order_id
     );
 
+    @GET("product/products")
+    Call<CommonApiResponse> searchProduct(
+            @Query("search") String search
+    );
+
 
 }

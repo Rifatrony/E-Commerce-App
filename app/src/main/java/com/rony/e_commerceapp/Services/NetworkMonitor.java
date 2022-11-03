@@ -24,7 +24,7 @@ public class NetworkMonitor extends BroadcastReceiver {
         }
         else if (checkNetworkConnection(context)){
             //dialog.dismiss();
-            Toast.makeText(context, "Network is connected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Network is connected", Toast.LENGTH_SHORT).show();
         }
 
     }
